@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Crusade</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+		<style>
+			/* ===========================================================
+			   WARHAMMER 40,000 "COGITATOR" / TERMINAL THEME (fluorescent green)
+			   =========================================================== */
+
+			:root{
+				/* base */
+				--bg0: #040705;
+				--bg1: #050b07;
+				--panel: #050b07;
+				--panel2:#07120b;
+
+				/* phosphor green */
+				--ph: #3CFF7A;     /* main fluorescent */
+				--ph2:#B7FFD0;     /* bright highlight */
+				--phDim:#17c654;   /* dim/secondary */
+
+				/* warning red */
+				--red: #ff4d4d;
+
+				/* edges */
+				--edge: #0e2a16;
+				--edge2:#184222;
+
+				/* text */
+				--text: #CFFFE1;
+				--muted: #7DFFB0;
+
+				/* input background */
+				--inset: #020402;
+
+				/* glow */
+				--glow: rgba(60,255,122,.22);
+
+				/* stripes */
+				--stripeA: #062010;
+				--stripeB: #050b07;
+			}
+
+			html, body { height: 100%; }
+			body{
+				background:
+					radial-gradient(1200px 600px at 20% 0%, rgba(60,255,122,.08), transparent 60%),
+					radial-gradient(900px 500px at 90% 10%, rgba(60,255,122,.06), transparent 65%),
+					linear-gradient(180deg, var(--bg0), var(--bg1));
+				color: var(--text);
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+				letter-spacing: .2px;
+			}
+
+			/* scanlines + vignette overlay */
+			body::before{
+				content:"";
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				background: linear-gradient(rgba(60,255,122,.04) 1px, transparent 1px);
+				background-size: 100% 3px;
+				opacity: .35;
+				mix-blend-mode: screen;
+			}
+			body::after{
+				content:"";
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(0,0,0,.58) 100%);
+				opacity: .9;
+			}
+
+			h1, h2, h3, h4, h5{
+				color: var(--ph2);
+				text-shadow: 0 0 12px rgba(60,255,122,.12);
+				font-family: inherit;
+			}
+
+			.muted, .text-muted { color: var(--muted) !important; }
+
+			.container{ position: relative; z-index: 1; }
+
+			.card{
+				background: linear-gradient(180deg, rgba(7,18,11,.92), rgba(5,11,7,.92));
+				border: 1px solid rgba(60,255,122,.16);
+				box-shadow:
+					inset 0 0 0 1px rgba(0,0,0,.75),
+					0 0 0 1px rgba(60,255,122,.06),
+					0 12px 30px rgba(0,0,0,.55);
+				border-radius: 0;
+				position: relative;
+				overflow: hidden;
+			}
+
+			/* stripe accent */
+			.card::before{
+				content:"";
+				position:absolute;
+				left:0; top:0; bottom:0;
+				width: 10px;
+				background: repeating-linear-gradient(45deg, var(--stripeA) 0px, var(--stripeA) 8px, var(--stripeB) 8px, var(--stripeB) 16px);
+				opacity: .85;
+				border-right: 1px solid rgba(60,255,122,.14);
+			}
+			.card > * { position: relative; z-index: 1; }
+			.card .card-body, .card .card-header { padding-left: 1.25rem; }
+
+			.card-header{
+				background: linear-gradient(180deg, rgba(5,11,7,.88), rgba(7,18,11,.88));
+				border-bottom: 1px solid rgba(60,255,122,.18);
+			}
+
+			.card-header.collapsible{ cursor: pointer; user-select: none; }
+			.card-header .chev{
+				color: var(--phDim);
+				text-shadow: 0 0 10px var(--glow);
+				font-size: 1rem;
+				margin-left: .75rem;
+			}
+			.card-header:hover .chev { color: var(--ph2); }
+
+			hr { border-top-color: rgba(60,255,122,.18); }
+
+			.nav-tabs{ border-bottom: 1px solid rgba(60,255,122,.20); }
+			.nav-tabs .nav-link{
+				border: 1px solid rgba(60,255,122,.18);
+				border-bottom: none;
+				border-radius: 0;
+				color: rgba(125,255,176,.9);
+				background: rgba(5,11,7,.72);
+				margin-right: .35rem;
+				text-transform: uppercase;
+				letter-spacing: .8px;
+				font-size: .85rem;
+			}
+			.nav-tabs .nav-link:hover{
+				color: var(--ph2);
+				box-shadow: 0 0 0 .2rem rgba(60,255,122,.06);
+			}
+			.nav-tabs .nav-link.active{
+				color: var(--ph2);
+				background: rgba(7,18,11,.9);
+				border-color: rgba(60,255,122,.38);
+				box-shadow: inset 0 0 0 1px rgba(0,0,0,.65), 0 0 18px rgba(60,255,122,.08);
+			}
+
+			.small-label{
+				color: rgba(125,255,176,.95);
+				font-weight: 700;
+				font-size: .8rem;
+				text-transform: uppercase;
+				letter-spacing: .6px;
+			}
+
+			.form-control, .custom-select, textarea.form-control{
+				background: linear-gradient(180deg, rgba(2,4,2,.92), rgba(5,9,6,.92));
+				color: var(--text);
+				border: 1px solid rgba(60,255,122,.24);
+				border-radius: 0;
+				box-shadow: inset 0 0 0 1px rgba(0,0,0,.75);
+			}
+			.form-control:focus, .custom-select:focus{
+				border-color: rgba(60,255,122,.65);
+				box-shadow: inset 0 0 0 1px rgba(0,0,0,.75), 0 0 0 .2rem rgba(60,255,122,.12);
+			}
+
+			.btn{ border-radius: 0; text-transform: uppercase; letter-spacing: .7px; font-weight: 700; }
+			.btn-outline-secondary{
+				color: rgba(125,255,176,.95);
+				border-color: rgba(60,255,122,.22);
+				background: rgba(5,11,7,.55);
+			}
+			.btn-outline-secondary:hover{
+				color: var(--ph2);
+				border-color: rgba(60,255,122,.50);
+				background: rgba(7,18,11,.72);
+				box-shadow: 0 0 0 .2rem rgba(60,255,122,.06);
+			}
+
+			.btn-outline-primary{
+				color: var(--ph2);
+				border-color: rgba(60,255,122,.42);
+				background: rgba(5,11,7,.6);
+			}
+			.btn-outline-primary:hover{
+				color: #021a0a;
+				background: rgba(60,255,122,.88);
+				border-color: rgba(60,255,122,.88);
+				box-shadow: 0 0 0 .2rem rgba(60,255,122,.10);
+			}
+
+			.btn-primary{
+				color: #021a0a;
+				background: rgba(60,255,122,.92);
+				border-color: rgba(60,255,122,.88);
+			}
+			.btn-primary:hover{
+				background: rgba(183,255,208,.95);
+				border-color: rgba(183,255,208,.95);
+			}
+
+			.btn-success{
+				color: #021a0a;
+				background: rgba(60,255,122,.70);
+				border-color: rgba(60,255,122,.55);
+			}
+			.btn-success:hover{
+				background: rgba(60,255,122,.88);
+				border-color: rgba(60,255,122,.75);
+			}
+
+			.btn-outline-danger{
+				color: #ffb3b3;
+				border-color: rgba(255,77,77,.55);
+				background: rgba(5,11,7,.6);
+			}
+			.btn-outline-danger:hover{
+				color: #1b0707;
+				background: rgba(255,77,77,.85);
+				border-color: rgba(255,77,77,.85);
+			}
+
+			.btn-xs { padding: .12rem .35rem; font-size: .75rem; line-height: 1.2; }
+
+			.alert{ border-radius: 0; }
+			.alert-info{
+				background: rgba(60,255,122,.08);
+				border-color: rgba(60,255,122,.24);
+				color: var(--text);
+			}
+			.alert-warning{
+				background: rgba(255,77,77,.08);
+				border-color: rgba(255,77,77,.22);
+				color: var(--text);
+			}
+
+			.table td, .table th { vertical-align: middle; }
+			.table-bordered{ border-color: rgba(60,255,122,.18); }
+			.table-bordered td, .table-bordered th{ border-color: rgba(60,255,122,.14); }
+			.thead-light th{
+				color: var(--ph2);
+				background: rgba(2,4,2,.90);
+				border-color: rgba(60,255,122,.18);
+				text-transform: uppercase;
+				letter-spacing: .7px;
+				font-size: .78rem;
+			}
+
+			.chip{
+				display: inline-flex;
+				align-items: center;
+				border: 1px solid rgba(60,255,122,.24);
+				border-radius: 0;
+				padding: .2rem .45rem;
+				margin: 0 .35rem .35rem 0;
+				background: rgba(2,4,2,.72);
+				box-shadow: inset 0 0 0 1px rgba(0,0,0,.7);
+			}
+			.chip .x{
+				margin-left: .45rem;
+				cursor: pointer;
+				font-weight: 900;
+				color: rgba(60,255,122,.75);
+				user-select: none;
+			}
+			.chip .x:hover{ color: var(--ph2); }
+
+			.badge-soft{
+				background: rgba(2,4,2,.72);
+				border: 1px solid rgba(60,255,122,.22);
+				color: var(--ph2);
+				border-radius: 0;
+			}
+
+			.dead-row-roster { opacity: .45; filter: grayscale(60%); }
+
+			.weapon-pill{
+				display:inline-block;
+				padding:.15rem .5rem;
+				border:1px solid rgba(60,255,122,.22);
+				border-radius: 0;
+				margin:0 .35rem .35rem 0;
+				background: rgba(2,4,2,.72);
+				box-shadow: inset 0 0 0 1px rgba(0,0,0,.7);
+			}
+			.weapon-pill b{ margin-right:.25rem; color: var(--ph2); }
+
+			.modal-content{
+				background: linear-gradient(180deg, rgba(7,18,11,.95), rgba(5,11,7,.95));
+				border: 1px solid rgba(60,255,122,.26);
+				border-radius: 0;
+				box-shadow: 0 18px 60px rgba(0,0,0,.8);
+			}
+			.modal-header{ border-bottom: 1px solid rgba(60,255,122,.18); }
+			.modal-footer{ border-top: 1px solid rgba(60,255,122,.18); }
+
+			.close{ color: var(--ph2); text-shadow: none; opacity: .85; }
+			.close:hover{ opacity: 1; }
+
+			.modal-xxl { max-width: 98vw; width: 98vw; }
+			#weaponsModal .modal-body { max-height: 78vh; overflow: auto; }
+			#weaponsModal .table { font-size: 0.92rem; }
+			#weaponsModal input.form-control-sm { height: calc(1.55em + .5rem + 2px); font-size: .92rem; }
+			.form-control-sm.mono { font-family: inherit; }
+			.sticky-bar {
+				position: sticky; top: 0; z-index: 5;
+				background: rgba(5,11,7,.96);
+				padding: .75rem;
+				border-bottom: 1px solid rgba(60,255,122,.18);
+			}
+
+			.custom-control-label::before{
+				background-color: rgba(2,4,2,.85);
+				border-color: rgba(60,255,122,.22);
+				border-radius: 0;
+			}
+			.custom-control-input:checked ~ .custom-control-label::before{
+				background-color: rgba(60,255,122,.75);
+				border-color: rgba(60,255,122,.75);
+			}
+			.custom-control-label{ color: rgba(125,255,176,.9); }
+			.custom-control-input:checked ~ .custom-control-label{ color: var(--ph2); }
+
+			.card-header.collapsible button,
+			.card-header.collapsible input,
+			.card-header.collapsible select,
+			.card-header.collapsible a { pointer-events: auto; }
+
+			code { color: var(--ph2); }
+		</style>
+	</head>
+
+	<body>
+		<!-- Full functionality is unchanged; only theme colors were switched to fluorescent green. -->
+		<!-- Keeping the same HTML + JS as the previous "Warhammer screen" version. -->
+
+		<div class="container my-4">
+			<div class="d-flex align-items-center justify-content-between mb-3">
+				<div>
+					<h1 class="mb-0">Crusade</h1>
+					<div class="muted">Cogitator interface: Army setup, roster, and battle logs</div>
+				</div>
+				<div class="text-right">
+					<button id="btnNewArmy" class="btn btn-outline-secondary btn-sm" type="button">New Army</button>
+					<button id="btnClearStorage" class="btn btn-outline-danger btn-sm" type="button">Purge Data</button>
+				</div>
+			</div>
+
+			<ul class="nav nav-tabs" id="mainTabs" role="tablist">
+				<li class="nav-item"><a class="nav-link active" id="tab-setup-link" data-toggle="tab" href="#tab-setup" role="tab">Setup</a></li>
+				<li class="nav-item"><a class="nav-link" id="tab-roster-link" data-toggle="tab" href="#tab-roster" role="tab">Roster</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="tab-setup" role="tabpanel" aria-labelledby="tab-setup-link">
+
+					<div class="card">
+						<div class="card-header collapsible" data-toggle="collapse" data-target="#collapse_import" aria-expanded="true">
+							<div class="d-flex align-items-center justify-content-between">
+								<div>
+									<strong>Import / Export</strong>
+									<div class="muted">Data-slate transfer (JSON)</div>
+								</div>
+								<div class="chev">▾</div>
+							</div>
+						</div>
+						<div id="collapse_import" class="collapse show">
+							<div class="card-body">
+								<div class="d-flex flex-wrap justify-content-between mb-2">
+									<div class="muted">Import replaces current army and saves to local storage.</div>
+									<div>
+										<button class="btn btn-outline-secondary btn-sm" id="btnLoadFromTextarea" type="button">Import</button>
+										<button class="btn btn-outline-primary btn-sm" id="btnCopyJson" type="button">Copy JSON</button>
+									</div>
+								</div>
+								<textarea id="armyJson" class="form-control" rows="10"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header collapsible" data-toggle="collapse" data-target="#collapse_army" aria-expanded="true">
+							<div class="d-flex align-items-center justify-content-between">
+								<div class="d-flex align-items-center">
+									<strong class="mr-3">Army Record</strong>
+									<span class="muted" id="armySummary"></span>
+								</div>
+								<div class="chev">▾</div>
+							</div>
+						</div>
+						<div id="collapse_army" class="collapse show">
+							<div class="card-body">
+								<form id="armyForm">
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label class="small-label" for="armyName">Designation</label>
+											<input type="text" class="form-control" id="armyName" required>
+										</div>
+										<div class="form-group col-md-4 d-flex align-items-end">
+											<button type="submit" class="btn btn-primary btn-block">Commit</button>
+										</div>
+									</div>
+
+									<div class="muted">Last saved: <span id="lastSaved">—</span></div>
+
+									<hr class="compact" />
+
+									<div class="section-title">Keywords</div>
+									<div class="form-row">
+										<div class="form-group col-md-9">
+											<input type="text" class="form-control" id="armyKeywordInput" placeholder="Type keyword and press Enter">
+										</div>
+									</div>
+									<div id="armyKeywords"></div>
+
+									<hr class="compact" />
+
+									<div class="section-title">Abilities</div>
+									<div class="form-row">
+										<div class="form-group col-md-9">
+											<input type="text" class="form-control" id="armyAbilityInput" placeholder="Type ability and press Enter">
+										</div>
+									</div>
+									<div id="armyAbilities"></div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div class="card" id="unitCreateCard">
+						<div class="card-header collapsible" data-toggle="collapse" data-target="#collapse_addunit" aria-expanded="true">
+							<div class="d-flex align-items-center justify-content-between">
+								<strong>Append Unit</strong>
+								<div class="chev">▾</div>
+							</div>
+						</div>
+						<div id="collapse_addunit" class="collapse show">
+							<div class="card-body">
+								<form id="unitForm">
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label class="small-label" for="unitName">Unit Name</label>
+											<input type="text" class="form-control" id="unitName" required>
+										</div>
+										<div class="form-group col-md-3">
+											<label class="small-label" for="unitNick">Callsign</label>
+											<input type="text" class="form-control" id="unitNick">
+										</div>
+										<div class="form-group col-md-3">
+											<label class="small-label" for="unitPoints">Points</label>
+											<input type="number" class="form-control" id="unitPoints" value="0" min="0" required>
+										</div>
+										<div class="form-group col-md-2 d-flex align-items-end">
+											<button type="submit" class="btn btn-success btn-block">Add</button>
+										</div>
+									</div>
+									<div class="muted" style="font-size:.85rem;">Unit keyword display includes: <strong>unit keywords + model keywords + bodyguard unit keywords</strong> (unique).</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-header collapsible" data-toggle="collapse" data-target="#collapse_units" aria-expanded="true">
+							<div class="d-flex align-items-center justify-content-between">
+								<div class="d-flex align-items-center">
+									<strong class="mr-3">Units</strong>
+									<span class="muted" id="unitsCount">0 units</span>
+								</div>
+								<div class="chev">▾</div>
+							</div>
+						</div>
+						<div id="collapse_units" class="collapse show">
+							<div class="card-body">
+								<div id="unitsEmpty" class="muted">No units yet.</div>
+								<div id="unitsList"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card" id="modelCard">
+						<div class="card-header collapsible" data-toggle="collapse" data-target="#collapse_addmodels" aria-expanded="true">
+							<div class="d-flex align-items-center justify-content-between">
+								<div>
+									<strong>Append Models</strong>
+									<div class="muted" id="selectedUnitText">No unit selected</div>
+								</div>
+								<div class="d-flex align-items-center">
+									<button class="btn btn-outline-danger btn-sm mr-3" id="btnClearSelection" type="button">Clear Selection</button>
+									<div class="chev">▾</div>
+								</div>
+							</div>
+						</div>
+						<div id="collapse_addmodels" class="collapse show">
+							<div class="card-body">
+								<form id="modelForm">
+									<div class="form-row">
+										<div class="form-group col-md-5">
+											<label class="small-label" for="modelName">Model Name</label>
+											<input type="text" class="form-control" id="modelName" required>
+										</div>
+										<div class="form-group col-md-4">
+											<label class="small-label" for="modelNick">Callsign</label>
+											<input type="text" class="form-control" id="modelNick">
+										</div>
+										<div class="form-group col-md-3">
+											<label class="small-label" for="modelQty">Quantity</label>
+											<input type="number" class="form-control" id="modelQty" value="1" min="1" required>
+										</div>
+									</div>
+
+									<hr />
+
+									<div class="form-row">
+										<div class="form-group col-md-2"><label class="small-label" for="m">M</label><input type="number" class="form-control" id="m" value="6" min="0" required></div>
+										<div class="form-group col-md-2"><label class="small-label" for="t">T</label><input type="number" class="form-control" id="t" value="4" min="0" required></div>
+										<div class="form-group col-md-2"><label class="small-label" for="sv">Sv</label><input type="text" class="form-control" id="sv" value="3+" required></div>
+										<div class="form-group col-md-2"><label class="small-label" for="inv">Inv</label><input type="text" class="form-control" id="inv" value="—"></div>
+										<div class="form-group col-md-2"><label class="small-label" for="fnp">FNP</label><input type="text" class="form-control" id="fnp" value="—"></div>
+										<div class="form-group col-md-2"><label class="small-label" for="w">W</label><input type="number" class="form-control" id="w" value="2" min="0" required></div>
+									</div>
+
+									<div class="form-row">
+										<div class="form-group col-md-2"><label class="small-label" for="ld">Ld</label><input type="number" class="form-control" id="ld" value="6" min="0" required></div>
+										<div class="form-group col-md-2"><label class="small-label" for="oc">OC</label><input type="number" class="form-control" id="oc" value="2" min="0" required></div>
+										<div class="form-group col-md-6 d-flex align-items-end"><div class="muted">Each added model is an individual instance.</div></div>
+										<div class="form-group col-md-2 d-flex align-items-end"><button type="submit" class="btn btn-success btn-block">Add</button></div>
+									</div>
+
+									<div class="alert alert-warning mb-0" id="selectUnitWarning" style="display:none;">Select a unit first to add models.</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="tab-pane fade" id="tab-roster" role="tabpanel" aria-labelledby="tab-roster-link">
+					<div class="card">
+						<div class="card-header d-flex align-items-center justify-content-between">
+							<strong>Roster</strong>
+							<div class="muted">Dead models are dimmed; killer is logged on death.</div>
+						</div>
+						<div class="card-body">
+							<div id="rosterEmpty" class="muted">No army loaded.</div>
+							<div id="rosterList"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Bodyguard Modal -->
+		<div class="modal fade" id="bodyguardModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Assign Bodyguards</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="muted mb-2" id="bodyguardModalUnitLabel"></div>
+						<div class="alert alert-warning" id="bodyguardCycleWarning" style="display:none;">Selection would create a bodyguard cycle; ignored.</div>
+						<div class="form-group">
+							<label class="small-label">Bodyguard units</label>
+							<select id="bodyguardSelect" class="form-control" multiple size="10"></select>
+						</div>
+						<div class="d-flex justify-content-between">
+							<div class="muted">Selected bodyguard points: <strong id="bodyguardSelectedPoints">0</strong></div>
+							<div class="muted">Parent total: <strong id="bodyguardParentTotal">0</strong></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="btnSaveBodyguards">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Weapons Modal -->
+		<div class="modal fade" id="weaponsModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-xxl" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Weapons</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+
+					<div class="sticky-bar">
+						<div class="row">
+							<div class="col-lg-9">
+								<div class="small-label">Weapon Library (from army)</div>
+								<select id="weaponLibrarySelect" class="form-control"></select>
+								<small class="form-text muted">Selected weapon is added to the correct category automatically.</small>
+							</div>
+							<div class="col-lg-3 d-flex align-items-end">
+								<button class="btn btn-outline-primary btn-block" id="btnAddLibraryWeapon" type="button">Add Selected</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-body">
+						<div class="muted mb-2" id="weaponsModalModelLabel"></div>
+
+						<div>
+							<div class="d-flex align-items-center justify-content-between mb-2">
+								<strong>Ranged</strong>
+								<button class="btn btn-sm btn-primary" type="button" id="btnAddRanged">+ New</button>
+							</div>
+							<div class="table-responsive mb-4">
+								<table class="table table-sm table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th style="min-width:180px;">Name</th>
+											<th style="min-width:90px;">Range</th>
+											<th style="min-width:70px;">A</th>
+											<th style="min-width:70px;">BS</th>
+											<th style="min-width:70px;">S</th>
+											<th style="min-width:70px;">AP</th>
+											<th style="min-width:70px;">D</th>
+											<th style="min-width:220px;">Abilities</th>
+											<th style="width:120px;"></th>
+										</tr>
+									</thead>
+									<tbody id="rangedRows"></tbody>
+								</table>
+							</div>
+						</div>
+
+						<div>
+							<div class="d-flex align-items-center justify-content-between mb-2">
+								<strong>Melee</strong>
+								<button class="btn btn-sm btn-primary" type="button" id="btnAddMelee">+ New</button>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-sm table-bordered">
+									<thead class="thead-light">
+										<tr>
+											<th style="min-width:180px;">Name</th>
+											<th style="min-width:70px;">A</th>
+											<th style="min-width:70px;">WS</th>
+											<th style="min-width:70px;">S</th>
+											<th style="min-width:70px;">AP</th>
+											<th style="min-width:70px;">D</th>
+											<th style="min-width:220px;">Abilities</th>
+											<th style="width:120px;"></th>
+										</tr>
+									</thead>
+									<tbody id="meleeRows"></tbody>
+								</table>
+							</div>
+						</div>
+
+						<hr class="compact" />
+						<div class="alert alert-info mb-0">Click <strong>Save Weapons</strong> to commit changes.</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="btnSaveWeapons">Save Weapons</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Model Keywords Modal -->
+		<div class="modal fade" id="modelKeywordsModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Model Keywords</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="muted mb-2" id="modelKeywordsModalModelLabel"></div>
+
+						<div class="form-row">
+							<div class="form-group col-md-8">
+								<label class="small-label" for="modelKeywordInput">Add keyword</label>
+								<input type="text" class="form-control" id="modelKeywordInput" placeholder="Type keyword and press Enter">
+							</div>
+							<div class="form-group col-md-4 d-flex align-items-end">
+								<button class="btn btn-outline-secondary btn-block" type="button" id="btnAddModelKeyword">Add</button>
+							</div>
+						</div>
+
+						<div class="section-title">Current keywords</div>
+						<div id="modelKeywordsChips"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Model Wargear Modal -->
+		<div class="modal fade" id="modelWargearModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Model Wargear</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="muted mb-2" id="modelWargearModalModelLabel"></div>
+
+						<div class="form-row">
+							<div class="form-group col-md-8">
+								<label class="small-label" for="modelWargearInput">Add wargear</label>
+								<input type="text" class="form-control" id="modelWargearInput" placeholder="e.g. Grenades, Medkit, Teleport Homer">
+							</div>
+							<div class="form-group col-md-4 d-flex align-items-end">
+								<button class="btn btn-outline-secondary btn-block" type="button" id="btnAddModelWargear">Add</button>
+							</div>
+						</div>
+
+						<div class="section-title">Current wargear</div>
+						<div id="modelWargearChips"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Death Log Modal -->
+		<div class="modal fade" id="deathLogModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Log Kill</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="muted mb-2" id="deathLogLabel"></div>
+						<div class="form-group">
+							<label class="small-label" for="enemyKillerName">Enemy model name</label>
+							<input id="enemyKillerName" class="form-control" placeholder="e.g. Hive Tyrant, Chaos Lord, etc.">
+							<small class="form-text muted">Stored on the model as <code>DeathLog</code> (name + timestamp). Leave blank to skip.</small>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Skip</button>
+						<button type="button" class="btn btn-primary" id="btnSaveDeathLog">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+		<script>
+			// ===========================
+			// Domain classes
+			// ===========================
+			class Army {
+				constructor(name){
+					this.ID = crypto.randomUUID();
+					this.Name = name;
+					this.Units = [];
+					this.Abilities = [];
+					this.Keywords = [];
+				}
+			}
+			class Unit {
+				constructor(name, nickName){
+					this.ID = crypto.randomUUID();
+					this.Name = name;
+					this.NickName = nickName;
+					this.Models = [];
+					this.Keywords = [];
+					this.Abilities = [];
+					this.Points = 0;
+					this.BodyGuardUnitIds = [];
+				}
+			}
+			class Model {
+				constructor(name, nickName, m, t, sv, invuln, fnp, w, ld, oc){
+					this.ID = crypto.randomUUID();
+					this.Name = name;
+					this.NickName = nickName;
+					this.Movement = m;
+					this.Toughness = t;
+					this.Save = sv;
+					this.InvulnerableSave = invuln;
+					this.FeelNoPain = fnp;
+					this.Wounds = w;
+					this.Leadership = ld;
+					this.OC = oc;
+					this.Keywords = [];
+					this.Ranged = [];
+					this.Melee = [];
+					this.Wargear = [];
+					this.IsDead = false;
+					this.DeathLog = []; // [{ EnemyModelName, AtIso }]
+				}
+			}
+
+			// ===========================
+			// Storage + state
+			// ===========================
+			const STORAGE_KEY = "crusade.army.v12";
+			let currentArmy = null;
+			let selectedUnitId = null;
+
+			let bodyguardModalUnitId = null;
+
+			let weaponsModalUnitId = null;
+			let weaponsModalModelId = null;
+			let weaponsDraft = null;
+
+			let modelKeywordsUnitId = null;
+			let modelKeywordsModelId = null;
+
+			let modelWargearUnitId = null;
+			let modelWargearModelId = null;
+
+			let deathLogUnitId = null;
+			let deathLogModelId = null;
+
+			function saveToStorage() {
+				if (!currentArmy) return;
+				localStorage.setItem(STORAGE_KEY, JSON.stringify(currentArmy));
+				$("#lastSaved").text(new Date().toLocaleString());
+			}
+			function loadFromStorage() {
+				const raw = localStorage.getItem(STORAGE_KEY);
+				if (!raw) return null;
+				try { return JSON.parse(raw); } catch { return null; }
+			}
+			function clearStorage() { localStorage.removeItem(STORAGE_KEY); }
+
+			// ===========================
+			// Helpers
+			// ===========================
+			function ensureArmyOrWarn() {
+				if (currentArmy) return true;
+				alert("Create an army first.");
+				return false;
+			}
+			function getSelectedUnit() {
+				if (!currentArmy || !selectedUnitId) return null;
+				return currentArmy.Units.find(u => u.ID === selectedUnitId) || null;
+			}
+			function formatUnitLabel(u) {
+				const nick = (u.NickName && u.NickName.trim().length) ? ` (${u.NickName.trim()})` : "";
+				return `${u.Name}${nick}`;
+			}
+			function escapeHtml(str) {
+				return String(str)
+					.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+					.replaceAll(">", "&gt;").replaceAll('"', "&quot;")
+					.replaceAll("'", "&#039;");
+			}
+			function escapeAttr(str) { return escapeHtml(str).replaceAll("\n", " "); }
+			function normalizeTextItem(v) { return String(v || "").trim(); }
+
+			function uniqueListCaseInsensitive(list) {
+				const out = [];
+				const seen = new Set();
+				for (const item of (list || [])) {
+					const n = normalizeTextItem(item);
+					if (!n) continue;
+					const key = n.toLowerCase();
+					if (seen.has(key)) continue;
+					seen.add(key);
+					out.push(n);
+				}
+				return out;
+			}
+
+			function parseMaybeNumber(field, value) {
+				const numericFields = new Set(["Movement","Toughness","Wounds","Leadership","OC","Points"]);
+				if (!numericFields.has(field)) return value;
+				const n = Number(value);
+				return Number.isFinite(n) ? n : 0;
+			}
+
+			function unitBasePoints(u) { return Number(u.Points) || 0; }
+			function unitBodyguardPoints(u) {
+				let sum = 0;
+				for (const id of (u.BodyGuardUnitIds || [])) {
+					const bg = currentArmy?.Units?.find(x => x.ID === id);
+					if (!bg) continue;
+					sum += unitTotalPoints(bg);
+				}
+				return sum;
+			}
+			function unitTotalPoints(u) { return unitBasePoints(u) + unitBodyguardPoints(u); }
+			function armyPoints(a) { return (a?.Units || []).reduce((sum, u) => sum + unitBasePoints(u), 0); }
+
+			function refreshExport() {
+				$("#armyJson").val(currentArmy ? JSON.stringify(currentArmy, null, 2) : "");
+				const summary = currentArmy
+					? `${currentArmy.Units.length} units • ${armyPoints(currentArmy)} pts`
+					: "No army created";
+				$("#armySummary").text(summary);
+			}
+
+			function renderChips($target, items, onRemove) {
+				$target.empty();
+				if (!items || !items.length) { $target.html(`<div class="muted">None</div>`); return; }
+				for (let i = 0; i < items.length; i++) {
+					const text = items[i];
+					const $chip = $(`<span class="chip"></span>`);
+					$chip.append(`<span>${escapeHtml(text)}</span>`);
+					const $x = $(`<span class="x" title="Remove">×</span>`);
+					$x.on("click", () => onRemove(i));
+					$chip.append($x);
+					$target.append($chip);
+				}
+			}
+			function addChipTo(list, text) {
+				const t = normalizeTextItem(text);
+				if (!t.length) return;
+				if (!Array.isArray(list)) return;
+				if (list.some(x => String(x).trim().toLowerCase() === t.toLowerCase())) return;
+				list.push(t);
+			}
+
+			// ===========================
+			// Weapon library + consolidation
+			// ===========================
+			function weaponKey(kind, w) {
+				const norm = (v) => String(v ?? "").trim();
+				return JSON.stringify({
+					Kind: kind,
+					Name: norm(w.Name),
+					Range: norm(w.Range),
+					Attacks: norm(w.Attacks),
+					Skill: norm(w.Skill),
+					Strength: norm(w.Strength),
+					AP: norm(w.AP),
+					Damage: norm(w.Damage),
+					Abilities: norm(w.Abilities)
+				});
+			}
+			function weaponLabel(kind, w) {
+				const n = (v) => String(v ?? "").trim();
+				if (kind === "ranged") {
+					return `${n(w.Name) || "Ranged"} • R ${n(w.Range)||"—"} • A ${n(w.Attacks)||"—"} • BS ${n(w.Skill)||"—"} • S ${n(w.Strength)||"—"} • AP ${n(w.AP)||"—"} • D ${n(w.Damage)||"—"}${n(w.Abilities) ? " • " + n(w.Abilities) : ""}`;
+				}
+				return `${n(w.Name) || "Melee"} • A ${n(w.Attacks)||"—"} • WS ${n(w.Skill)||"—"} • S ${n(w.Strength)||"—"} • AP ${n(w.AP)||"—"} • D ${n(w.Damage)||"—"}${n(w.Abilities) ? " • " + n(w.Abilities) : ""}`;
+			}
+			function buildWeaponLibraryFromArmy() {
+				const map = new Map();
+				if (!currentArmy) return [];
+				for (const u of (currentArmy.Units || [])) {
+					for (const m of (u.Models || [])) {
+						for (const w of (m.Ranged || [])) {
+							if (!w || !String(w.Name || "").trim()) continue;
+							const k = weaponKey("ranged", w);
+							if (!map.has(k)) map.set(k, { kind: "ranged", weapon: w, label: weaponLabel("ranged", w) });
+						}
+						for (const w of (m.Melee || [])) {
+							if (!w || !String(w.Name || "").trim()) continue;
+							const k = weaponKey("melee", w);
+							if (!map.has(k)) map.set(k, { kind: "melee", weapon: w, label: weaponLabel("melee", w) });
+						}
+					}
+				}
+				return Array.from(map.values())
+					.sort((a,b)=>a.label.localeCompare(b.label))
+					.map((x, idx) => ({ id: String(idx), ...x }));
+			}
+			function renderWeaponLibrarySelect() {
+				const $sel = $("#weaponLibrarySelect");
+				$sel.empty();
+				const lib = buildWeaponLibraryFromArmy();
+				if (!lib.length) {
+					$sel.append(`<option value="">(No existing weapons found in army)</option>`);
+					$sel.data("lib", []);
+					return;
+				}
+				$sel.append(`<option value="">(Select a weapon profile…)</option>`);
+				const ranged = lib.filter(x => x.kind === "ranged");
+				const melee = lib.filter(x => x.kind === "melee");
+				if (ranged.length) {
+					$sel.append(`<optgroup label="Ranged"></optgroup>`);
+					const $g = $sel.find('optgroup[label="Ranged"]');
+					for (const entry of ranged) $g.append(`<option value="${escapeAttr(entry.id)}">${escapeHtml(entry.label)}</option>`);
+				}
+				if (melee.length) {
+					$sel.append(`<optgroup label="Melee"></optgroup>`);
+					const $g = $sel.find('optgroup[label="Melee"]');
+					for (const entry of melee) $g.append(`<option value="${escapeAttr(entry.id)}">${escapeHtml(entry.label)}</option>`);
+				}
+				$sel.data("lib", lib);
+			}
+			function addSelectedLibraryWeaponAuto() {
+				const lib = $("#weaponLibrarySelect").data("lib") || [];
+				const id = $("#weaponLibrarySelect").val();
+				if (!id) return;
+				const entry = lib.find(x => x.id === id);
+				if (!entry) return;
+
+				const weaponCopy = JSON.parse(JSON.stringify(entry.weapon));
+				if (entry.kind === "ranged") weaponsDraft.Ranged.push(weaponCopy);
+				if (entry.kind === "melee") weaponsDraft.Melee.push(weaponCopy);
+				renderWeaponsModalTables();
+			}
+
+			function consolidateUnitWeapons(u) {
+				const counts = new Map();
+				for (const m of (u.Models || [])) {
+					if (m.IsDead) continue;
+					for (const w of (m.Ranged || [])) {
+						if (!w || !String(w.Name || "").trim()) continue;
+						const k = weaponKey("ranged", w);
+						if (!counts.has(k)) counts.set(k, { kind: "ranged", weapon: w, qty: 0 });
+						counts.get(k).qty += 1;
+					}
+					for (const w of (m.Melee || [])) {
+						if (!w || !String(w.Name || "").trim()) continue;
+						const k = weaponKey("melee", w);
+						if (!counts.has(k)) counts.set(k, { kind: "melee", weapon: w, qty: 0 });
+						counts.get(k).qty += 1;
+					}
+				}
+				return Array.from(counts.values()).sort((a,b) => weaponLabel(a.kind,a.weapon).localeCompare(weaponLabel(b.kind,b.weapon)));
+			}
+
+			// ===========================
+			// Render: setup
+			// ===========================
+			function renderSelectedUnitHeader() {
+				const u = getSelectedUnit();
+				$("#selectedUnitText").html(u ? `Selected: <strong>${escapeHtml(formatUnitLabel(u))}</strong>` : "No unit selected");
+			}
+
+			function renderArmyMeta() {
+				if (!currentArmy) {
+					renderChips($("#armyKeywords"), [], () => {});
+					renderChips($("#armyAbilities"), [], () => {});
+					return;
+				}
+				renderChips($("#armyKeywords"), currentArmy.Keywords || [], (idx) => { currentArmy.Keywords.splice(idx, 1); saveToStorage(); renderAll(); });
+				renderChips($("#armyAbilities"), currentArmy.Abilities || [], (idx) => { currentArmy.Abilities.splice(idx, 1); saveToStorage(); renderAll(); });
+			}
+
+			function collectUnitKeywords(u, includeBodyguards = true, visitedUnitIds = new Set()) {
+				if (!u) return [];
+				if (visitedUnitIds.has(u.ID)) return [];
+				visitedUnitIds.add(u.ID);
+
+				let all = [];
+				all.push(...(u.Keywords || []));
+				for (const m of (u.Models || [])) all.push(...(m.Keywords || []));
+
+				if (includeBodyguards) {
+					for (const bgId of (u.BodyGuardUnitIds || [])) {
+						const bg = currentArmy?.Units?.find(x => x.ID === bgId);
+						if (!bg) continue;
+						all.push(...collectUnitKeywords(bg, true, visitedUnitIds));
+					}
+				}
+				return uniqueListCaseInsensitive(all).sort((a,b)=>a.localeCompare(b));
+			}
+
+			function renderUnits() {
+				const $list = $("#unitsList");
+				$list.empty();
+
+				if (!currentArmy || currentArmy.Units.length === 0) {
+					$("#unitsEmpty").show();
+					$("#unitsCount").text("0 units");
+					renderSelectedUnitHeader();
+					refreshExport();
+					return;
+				}
+
+				$("#unitsEmpty").hide();
+				$("#unitsCount").text(`${currentArmy.Units.length} unit(s)`);
+
+				for (const u of currentArmy.Units) {
+					const isSelected = u.ID === selectedUnitId;
+					const inheritedKeywords = collectUnitKeywords(u, true);
+
+					const modelsRows = (u.Models || []).map(m => `
+						<tr>
+							<td style="min-width:260px;">
+								<div><strong>${escapeHtml(m.Name)}</strong>${m.NickName ? ` <span class="muted">(${escapeHtml(m.NickName)})</span>` : ""}</div>
+								<div class="mt-2">
+									<button class="btn btn-xs btn-outline-secondary" data-action="model-keywords" data-unit-id="${u.ID}" data-model-id="${m.ID}" type="button">Keywords…</button>
+									<button class="btn btn-xs btn-outline-secondary ml-1" data-action="model-wargear" data-unit-id="${u.ID}" data-model-id="${m.ID}" type="button">Wargear…</button>
+								</div>
+								<div class="mt-1 muted"><small>
+									KW: ${uniqueListCaseInsensitive(m.Keywords || []).join(", ") || "—"}<br/>
+									WG: ${uniqueListCaseInsensitive(m.Wargear || []).join(", ") || "—"}
+								</small></div>
+							</td>
+							<td class="text-center">${Number(m.Movement)||0}</td>
+							<td class="text-center">${Number(m.Toughness)||0}</td>
+							<td class="text-center">${escapeHtml(m.Save)}</td>
+							<td class="text-center">${escapeHtml(m.InvulnerableSave || "—")}</td>
+							<td class="text-center">${escapeHtml(m.FeelNoPain || "—")}</td>
+							<td class="text-center">${Number(m.Wounds)||0}</td>
+							<td class="text-center">${Number(m.Leadership)||0}</td>
+							<td class="text-center">${Number(m.OC)||0}</td>
+							<td class="text-right" style="width:220px;">
+								<div class="d-flex justify-content-end">
+									<button class="btn btn-sm btn-outline-secondary mr-2" data-action="edit-weapons" data-unit-id="${u.ID}" data-model-id="${m.ID}" type="button">Weapons</button>
+									<button class="btn btn-sm btn-outline-danger" data-action="remove-model" data-unit-id="${u.ID}" data-model-id="${m.ID}" type="button">Remove</button>
+								</div>
+							</td>
+						</tr>
+					`).join("");
+
+					const bgSummary = (() => {
+						const ids = u.BodyGuardUnitIds || [];
+						if (!ids.length) return `None`;
+						return ids.map(id => {
+							const bg = currentArmy.Units.find(x => x.ID === id);
+							return bg ? formatUnitLabel(bg) : "";
+						}).filter(Boolean).join(", ");
+					})();
+
+					const collapseId = `collapse_unit_${u.ID}`;
+					$list.append(`
+						<div class="card ${isSelected ? "border-primary" : ""}">
+							<div class="card-header collapsible" data-toggle="collapse" data-target="#${collapseId}" aria-expanded="true">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<div class="d-flex align-items-center flex-wrap">
+											<strong class="mr-2">${escapeHtml(formatUnitLabel(u))}</strong>
+											${isSelected ? `<span class="badge badge-soft mr-2">Selected</span>` : ``}
+											<span class="muted">Base:${unitBasePoints(u)} • BG:${unitBodyguardPoints(u)} • Total:${unitTotalPoints(u)}</span>
+										</div>
+										<div class="mt-2">
+											<button class="btn btn-sm ${isSelected ? "btn-outline-secondary" : "btn-outline-primary"}"
+												data-action="select-unit" data-unit-id="${u.ID}" type="button">
+												${isSelected ? "Selected" : "Select"}
+											</button>
+											<button class="btn btn-sm btn-outline-danger ml-2" data-action="remove-unit" data-unit-id="${u.ID}" type="button">Remove Unit</button>
+											<button class="btn btn-sm btn-outline-secondary ml-2" data-action="assign-bodyguard" data-unit-id="${u.ID}" type="button">Bodyguards…</button>
+										</div>
+										<div class="mt-2 muted"><small>Inherited Keywords: ${inheritedKeywords.join(", ") || "—"}</small></div>
+										<div class="mt-1 muted"><small>Bodyguards: ${escapeHtml(bgSummary || "—")}</small></div>
+									</div>
+									<div class="chev">▾</div>
+								</div>
+							</div>
+
+							<div id="${collapseId}" class="collapse show">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-4">
+											<label class="small-label">Unit Name</label>
+											<input class="form-control form-control-sm" data-action="edit-unit" data-field="Name" data-unit-id="${u.ID}" value="${escapeAttr(u.Name)}" />
+										</div>
+										<div class="form-group col-md-4">
+											<label class="small-label">Callsign</label>
+											<input class="form-control form-control-sm" data-action="edit-unit" data-field="NickName" data-unit-id="${u.ID}" value="${escapeAttr(u.NickName || "")}" />
+										</div>
+										<div class="form-group col-md-4">
+											<label class="small-label">Points</label>
+											<input type="number" min="0" class="form-control form-control-sm" data-action="edit-unit" data-field="Points" data-unit-id="${u.ID}" value="${Number(u.Points)||0}" />
+										</div>
+									</div>
+
+									<div class="section-title">Unit Keywords</div>
+									<div class="form-row">
+										<div class="form-group col-md-9">
+											<input class="form-control form-control-sm" placeholder="Type keyword and press Enter" data-action="unit-keyword-input" data-unit-id="${u.ID}" />
+										</div>
+									</div>
+									<div data-slot="unit-keywords" data-unit-id="${u.ID}"></div>
+
+									<div class="section-title mt-3">Unit Abilities</div>
+									<div class="form-row">
+										<div class="form-group col-md-9">
+											<input class="form-control form-control-sm" placeholder="Type ability and press Enter" data-action="unit-ability-input" data-unit-id="${u.ID}" />
+										</div>
+									</div>
+									<div data-slot="unit-abilities" data-unit-id="${u.ID}"></div>
+
+									<div class="section-title mt-3">Models</div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered mb-0">
+											<thead class="thead-light">
+												<tr>
+													<th>Model</th>
+													<th class="text-center">M</th>
+													<th class="text-center">T</th>
+													<th class="text-center">Sv</th>
+													<th class="text-center">Inv</th>
+													<th class="text-center">FNP</th>
+													<th class="text-center">W</th>
+													<th class="text-center">Ld</th>
+													<th class="text-center">OC</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												${modelsRows || `<tr><td colspan="10" class="muted">No models yet.</td></tr>`}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					`);
+				}
+
+				for (const u of currentArmy.Units) {
+					renderChips($(`[data-slot="unit-keywords"][data-unit-id="${u.ID}"]`), u.Keywords || [], (idx) => {
+						u.Keywords.splice(idx, 1); saveToStorage(); renderAll();
+					});
+					renderChips($(`[data-slot="unit-abilities"][data-unit-id="${u.ID}"]`), u.Abilities || [], (idx) => {
+						u.Abilities.splice(idx, 1); saveToStorage(); renderAll();
+					});
+				}
+
+				renderSelectedUnitHeader();
+				renderArmyMeta();
+				refreshExport();
+			}
+
+			// ===========================
+			// Render: roster
+			// ===========================
+			function renderRoster() {
+				const $roster = $("#rosterList");
+				$roster.empty();
+
+				if (!currentArmy || !currentArmy.Units?.length) { $("#rosterEmpty").show(); return; }
+				$("#rosterEmpty").hide();
+
+				for (const u of currentArmy.Units) {
+					const living = (u.Models || []).filter(m => !m.IsDead).length;
+					const dead = (u.Models || []).filter(m => m.IsDead).length;
+
+					const weapons = consolidateUnitWeapons(u);
+					const weaponHtml = weapons.length
+						? weapons.map(x => `<span class="weapon-pill"><b>${x.qty}×</b>${escapeHtml(weaponLabel(x.kind, x.weapon))}</span>`).join("")
+						: `<span class="muted">No weapons (or all models dead).</span>`;
+
+					const modelsHtml = (u.Models || []).map(m => {
+						const wg = uniqueListCaseInsensitive(m.Wargear || []).join(", ");
+						const lastKill = (m.DeathLog || []).slice(-1)[0];
+						const killLine = lastKill?.EnemyModelName ? `Killed by: ${escapeHtml(lastKill.EnemyModelName)}` : "";
+						return `
+							<tr class="${m.IsDead ? "dead-row-roster" : ""}">
+								<td>
+									<strong>${escapeHtml(m.Name)}</strong>${m.NickName ? ` <span class="muted">(${escapeHtml(m.NickName)})</span>` : ""}
+									<div class="muted"><small>KW: ${uniqueListCaseInsensitive(m.Keywords || []).join(", ") || "—"}</small></div>
+									<div class="muted"><small>Wargear: ${wg || "—"}</small></div>
+									${killLine ? `<div class="muted"><small>${killLine}</small></div>` : ``}
+								</td>
+								<td class="text-center">${Number(m.Movement)||0}</td>
+								<td class="text-center">${Number(m.Toughness)||0}</td>
+								<td class="text-center">${escapeHtml(m.Save)}</td>
+								<td class="text-center">${escapeHtml(m.InvulnerableSave || "—")}</td>
+								<td class="text-center">${escapeHtml(m.FeelNoPain || "—")}</td>
+								<td class="text-center">${Number(m.Wounds)||0}</td>
+								<td class="text-center">${Number(m.Leadership)||0}</td>
+								<td class="text-center">${Number(m.OC)||0}</td>
+								<td class="text-right">
+									<div class="custom-control custom-switch d-inline-block">
+										<input type="checkbox" class="custom-control-input"
+											id="dead_${m.ID}"
+											data-action="toggle-dead"
+											data-unit-id="${u.ID}"
+											data-model-id="${m.ID}"
+											${m.IsDead ? "checked" : ""}>
+										<label class="custom-control-label" for="dead_${m.ID}">Dead</label>
+									</div>
+								</td>
+							</tr>
+						`;
+					}).join("") || `<tr><td colspan="10" class="muted">No models.</td></tr>`;
+
+					const collapseId = `collapse_roster_${u.ID}`;
+					$roster.append(`
+						<div class="card">
+							<div class="card-header collapsible" data-toggle="collapse" data-target="#${collapseId}" aria-expanded="true">
+								<div class="d-flex align-items-center justify-content-between">
+									<div>
+										<strong>${escapeHtml(formatUnitLabel(u))}</strong>
+										<div class="muted">Models: ${living} alive, ${dead} dead • Base:${unitBasePoints(u)} • Total:${unitTotalPoints(u)}</div>
+									</div>
+									<div class="chev">▾</div>
+								</div>
+							</div>
+
+							<div id="${collapseId}" class="collapse show">
+								<div class="card-body">
+									<div class="section-title">Consolidated Weapons (alive models only)</div>
+									<div class="mb-3">${weaponHtml}</div>
+
+									<div class="section-title">Models</div>
+									<div class="table-responsive">
+										<table class="table table-sm table-bordered mb-0">
+											<thead class="thead-light">
+												<tr>
+													<th>Model</th>
+													<th class="text-center">M</th>
+													<th class="text-center">T</th>
+													<th class="text-center">Sv</th>
+													<th class="text-center">Inv</th>
+													<th class="text-center">FNP</th>
+													<th class="text-center">W</th>
+													<th class="text-center">Ld</th>
+													<th class="text-center">OC</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>${modelsHtml}</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					`);
+				}
+			}
+
+			// ===========================
+			// Modals: bodyguards
+			// ===========================
+			function createsBodyguardCycle(parentId, candidateId) {
+				const visited = new Set();
+				function dfs(uId) {
+					if (visited.has(uId)) return false;
+					visited.add(uId);
+					const u = currentArmy.Units.find(x => x.ID === uId);
+					const children = (u?.BodyGuardUnitIds || []);
+					if (children.includes(parentId)) return true;
+					for (const c of children) if (dfs(c)) return true;
+					return false;
+				}
+				return dfs(candidateId);
+			}
+
+			function openBodyguardModal(unitId) {
+				const parent = currentArmy.Units.find(u => u.ID === unitId);
+				if (!parent) return;
+
+				bodyguardModalUnitId = unitId;
+				$("#bodyguardModalUnitLabel").html(`Parent Unit: <strong>${escapeHtml(formatUnitLabel(parent))}</strong>`);
+				$("#bodyguardCycleWarning").hide();
+
+				const $sel = $("#bodyguardSelect");
+				$sel.empty();
+
+				const candidates = currentArmy.Units
+					.filter(u => u.ID !== unitId)
+					.sort((a,b) => formatUnitLabel(a).localeCompare(formatUnitLabel(b)));
+
+				for (const c of candidates) {
+					const opt = document.createElement("option");
+					opt.value = c.ID;
+					opt.textContent = `${formatUnitLabel(c)} (${unitBasePoints(c)} pts)`;
+					if ((parent.BodyGuardUnitIds || []).includes(c.ID)) opt.selected = true;
+					$sel.append(opt);
+				}
+
+				updateBodyguardModalTotals();
+				$("#bodyguardModal").modal("show");
+			}
+
+			function updateBodyguardModalTotals() {
+				const parent = currentArmy?.Units?.find(u => u.ID === bodyguardModalUnitId);
+				if (!parent) return;
+
+				const selectedIds = ($("#bodyguardSelect").val() || []);
+				let selectedPoints = 0;
+				for (const id of selectedIds) {
+					const u = currentArmy.Units.find(x => x.ID === id);
+					if (!u) continue;
+					selectedPoints += unitTotalPoints(u);
+				}
+				$("#bodyguardSelectedPoints").text(selectedPoints);
+				$("#bodyguardParentTotal").text((unitBasePoints(parent) + selectedPoints));
+			}
+
+			function saveBodyguardsFromModal() {
+				const parent = currentArmy.Units.find(u => u.ID === bodyguardModalUnitId);
+				if (!parent) return;
+
+				const selectedIds = ($("#bodyguardSelect").val() || []);
+				const finalIds = [];
+				let hadCycle = false;
+
+				for (const id of selectedIds) {
+					if (createsBodyguardCycle(parent.ID, id)) { hadCycle = true; continue; }
+					finalIds.push(id);
+				}
+				if (hadCycle) $("#bodyguardCycleWarning").show();
+
+				parent.BodyGuardUnitIds = finalIds;
+				saveToStorage();
+				renderAll();
+				$("#bodyguardModal").modal("hide");
+			}
+
+			// ===========================
+			// Modals: weapons
+			// ===========================
+			function openWeaponsModal(unitId, modelId) {
+				const u = currentArmy.Units.find(x => x.ID === unitId);
+				const m = (u?.Models || []).find(x => x.ID === modelId);
+				if (!u || !m) return;
+
+				weaponsModalUnitId = unitId;
+				weaponsModalModelId = modelId;
+
+				weaponsDraft = {
+					Ranged: JSON.parse(JSON.stringify(m.Ranged || [])),
+					Melee: JSON.parse(JSON.stringify(m.Melee || []))
+				};
+
+				$("#weaponsModalModelLabel").html(`Model: <strong>${escapeHtml(m.Name)}</strong> <span class="muted">in</span> <strong>${escapeHtml(formatUnitLabel(u))}</strong>`);
+				renderWeaponLibrarySelect();
+				renderWeaponsModalTables();
+				$("#weaponsModal").modal("show");
+			}
+
+			function newRangedWeapon() { return { Name: "", Range: "", Attacks: "", Skill: "", Strength: "", AP: "", Damage: "", Abilities: "" }; }
+			function newMeleeWeapon() { return { Name: "", Attacks: "", Skill: "", Strength: "", AP: "", Damage: "", Abilities: "" }; }
+
+			function renderWeaponsModalTables() {
+				const ranged = weaponsDraft?.Ranged || [];
+				const melee = weaponsDraft?.Melee || [];
+
+				$("#rangedRows").html(ranged.map((w, idx) => `
+					<tr>
+						<td><input class="form-control form-control-sm" data-kind="ranged" data-idx="${idx}" data-field="Name" value="${escapeAttr(w.Name || "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="ranged" data-idx="${idx}" data-field="Range" value="${escapeAttr(w.Range || "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="ranged" data-idx="${idx}" data-field="Attacks" value="${escapeAttr(w.Attacks ?? "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="ranged" data-idx="${idx}" data-field="Skill" value="${escapeAttr(w.Skill || "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="ranged" data-idx="${idx}" data-field="Strength" value="${escapeAttr(w.Strength ?? "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="ranged" data-idx="${idx}" data-field="AP" value="${escapeAttr(w.AP ?? "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="ranged" data-idx="${idx}" data-field="Damage" value="${escapeAttr(w.Damage ?? "")}"></td>
+						<td><input class="form-control form-control-sm" data-kind="ranged" data-idx="${idx}" data-field="Abilities" value="${escapeAttr(w.Abilities || "")}"></td>
+						<td class="text-right"><button class="btn btn-sm btn-outline-danger" type="button" data-action="remove-weapon" data-kind="ranged" data-idx="${idx}">Remove</button></td>
+					</tr>
+				`).join("") || `<tr><td colspan="9" class="muted">No ranged weapons.</td></tr>`);
+
+				$("#meleeRows").html(melee.map((w, idx) => `
+					<tr>
+						<td><input class="form-control form-control-sm" data-kind="melee" data-idx="${idx}" data-field="Name" value="${escapeAttr(w.Name || "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="melee" data-idx="${idx}" data-field="Attacks" value="${escapeAttr(w.Attacks ?? "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="melee" data-idx="${idx}" data-field="Skill" value="${escapeAttr(w.Skill || "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="melee" data-idx="${idx}" data-field="Strength" value="${escapeAttr(w.Strength ?? "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="melee" data-idx="${idx}" data-field="AP" value="${escapeAttr(w.AP ?? "")}"></td>
+						<td><input class="form-control form-control-sm mono" data-kind="melee" data-idx="${idx}" data-field="Damage" value="${escapeAttr(w.Damage ?? "")}"></td>
+						<td><input class="form-control form-control-sm" data-kind="melee" data-idx="${idx}" data-field="Abilities" value="${escapeAttr(w.Abilities || "")}"></td>
+						<td class="text-right"><button class="btn btn-sm btn-outline-danger" type="button" data-action="remove-weapon" data-kind="melee" data-idx="${idx}">Remove</button></td>
+					</tr>
+				`).join("") || `<tr><td colspan="8" class="muted">No melee weapons.</td></tr>`);
+			}
+
+			function saveWeaponsFromModal() {
+				const u = currentArmy.Units.find(x => x.ID === weaponsModalUnitId);
+				const m = (u?.Models || []).find(x => x.ID === weaponsModalModelId);
+				if (!u || !m) return;
+
+				m.Ranged = (weaponsDraft?.Ranged || []).filter(w => (w.Name || "").trim().length);
+				m.Melee = (weaponsDraft?.Melee || []).filter(w => (w.Name || "").trim().length);
+
+				saveToStorage();
+				renderAll();
+				$("#weaponsModal").modal("hide");
+			}
+
+			// ===========================
+			// Modals: keywords / wargear
+			// ===========================
+			function openModelKeywordsModal(unitId, modelId) {
+				const u = currentArmy.Units.find(x => x.ID === unitId);
+				const m = (u?.Models || []).find(x => x.ID === modelId);
+				if (!u || !m) return;
+
+				modelKeywordsUnitId = unitId;
+				modelKeywordsModelId = modelId;
+
+				$("#modelKeywordsModalModelLabel").html(`Model: <strong>${escapeHtml(m.Name)}</strong> in <strong>${escapeHtml(formatUnitLabel(u))}</strong>`);
+				$("#modelKeywordInput").val("");
+				renderModelKeywordChips();
+				$("#modelKeywordsModal").modal("show");
+			}
+			function renderModelKeywordChips() {
+				const u = currentArmy.Units.find(x => x.ID === modelKeywordsUnitId);
+				const m = (u?.Models || []).find(x => x.ID === modelKeywordsModelId);
+				if (!m) return;
+
+				m.Keywords = m.Keywords || [];
+				const kws = uniqueListCaseInsensitive(m.Keywords);
+
+				renderChips($("#modelKeywordsChips"), kws, (idx) => {
+					const toRemove = kws[idx];
+					m.Keywords = (m.Keywords || []).filter(x => normalizeTextItem(x).toLowerCase() !== normalizeTextItem(toRemove).toLowerCase());
+					saveToStorage();
+					renderModelKeywordChips();
+					renderAll();
+				});
+			}
+			function addKeywordToCurrentModel() {
+				const text = $("#modelKeywordInput").val();
+				const u = currentArmy.Units.find(x => x.ID === modelKeywordsUnitId);
+				const m = (u?.Models || []).find(x => x.ID === modelKeywordsModelId);
+				if (!m) return;
+
+				m.Keywords = m.Keywords || [];
+				addChipTo(m.Keywords, text);
+				$("#modelKeywordInput").val("");
+
+				saveToStorage();
+				renderModelKeywordChips();
+				renderAll();
+			}
+
+			function openModelWargearModal(unitId, modelId) {
+				const u = currentArmy.Units.find(x => x.ID === unitId);
+				const m = (u?.Models || []).find(x => x.ID === modelId);
+				if (!u || !m) return;
+
+				modelWargearUnitId = unitId;
+				modelWargearModelId = modelId;
+
+				$("#modelWargearModalModelLabel").html(`Model: <strong>${escapeHtml(m.Name)}</strong> in <strong>${escapeHtml(formatUnitLabel(u))}</strong>`);
+				$("#modelWargearInput").val("");
+				renderModelWargearChips();
+				$("#modelWargearModal").modal("show");
+			}
+			function renderModelWargearChips() {
+				const u = currentArmy.Units.find(x => x.ID === modelWargearUnitId);
+				const m = (u?.Models || []).find(x => x.ID === modelWargearModelId);
+				if (!m) return;
+
+				m.Wargear = m.Wargear || [];
+				const items = uniqueListCaseInsensitive(m.Wargear);
+
+				renderChips($("#modelWargearChips"), items, (idx) => {
+					const toRemove = items[idx];
+					m.Wargear = (m.Wargear || []).filter(x => normalizeTextItem(x).toLowerCase() !== normalizeTextItem(toRemove).toLowerCase());
+					saveToStorage();
+					renderModelWargearChips();
+					renderAll();
+				});
+			}
+			function addWargearToCurrentModel() {
+				const text = $("#modelWargearInput").val();
+				const u = currentArmy.Units.find(x => x.ID === modelWargearUnitId);
+				const m = (u?.Models || []).find(x => x.ID === modelWargearModelId);
+				if (!m) return;
+
+				m.Wargear = m.Wargear || [];
+				addChipTo(m.Wargear, text);
+				$("#modelWargearInput").val("");
+
+				saveToStorage();
+				renderModelWargearChips();
+				renderAll();
+			}
+
+			// ===========================
+			// Death log modal
+			// ===========================
+			function openDeathLogModal(unitId, modelId) {
+				const u = currentArmy.Units.find(x => x.ID === unitId);
+				const m = (u?.Models || []).find(x => x.ID === modelId);
+				if (!u || !m) return;
+
+				deathLogUnitId = unitId;
+				deathLogModelId = modelId;
+
+				$("#enemyKillerName").val("");
+				$("#deathLogLabel").html(`Model <strong>${escapeHtml(m.Name)}</strong> in <strong>${escapeHtml(formatUnitLabel(u))}</strong> was marked dead.`);
+				$("#deathLogModal").modal("show");
+			}
+			function saveDeathLogFromModal() {
+				const u = currentArmy?.Units?.find(x => x.ID === deathLogUnitId);
+				const m = (u?.Models || []).find(x => x.ID === deathLogModelId);
+				if (!m) return;
+
+				const name = normalizeTextItem($("#enemyKillerName").val());
+				if (name.length) {
+					m.DeathLog = m.DeathLog || [];
+					m.DeathLog.push({ EnemyModelName: name, AtIso: new Date().toISOString() });
+				}
+
+				saveToStorage();
+				renderAll();
+				$("#deathLogModal").modal("hide");
+			}
+
+			// ===========================
+			// Import / load normalization
+			// ===========================
+			function normalizeLoadedArmy(army) {
+				army.Units = army.Units || [];
+				army.Keywords = army.Keywords || [];
+				army.Abilities = army.Abilities || [];
+
+				for (const u of army.Units) {
+					u.Models = u.Models || [];
+					u.Keywords = u.Keywords || [];
+					u.Abilities = u.Abilities || [];
+					u.Points = Number(u.Points) || 0;
+					u.BodyGuardUnitIds = u.BodyGuardUnitIds || [];
+
+					for (const m of u.Models) {
+						if (m.Qty && Number(m.Qty) > 1) {
+							const qty = Number(m.Qty);
+							m.Qty = 1;
+							for (let i = 1; i < qty; i++) {
+								const clone = JSON.parse(JSON.stringify(m));
+								clone.ID = crypto.randomUUID();
+								u.Models.push(clone);
+							}
+						}
+						m.Keywords = m.Keywords || [];
+						m.Ranged = m.Ranged || [];
+						m.Melee = m.Melee || [];
+						m.Wargear = m.Wargear || [];
+						m.DeathLog = m.DeathLog || [];
+						if (typeof m.IsDead !== "boolean") m.IsDead = false;
+						if (m.InvulnerableSave === undefined) m.InvulnerableSave = "—";
+						if (m.FeelNoPain === undefined) m.FeelNoPain = "—";
+						delete m.Qty;
+					}
+				}
+				return army;
+			}
+
+			function importArmyFromTextarea() {
+				const raw = $("#armyJson").val();
+				if (!raw || !raw.trim().length) { alert("Paste an army JSON into the textarea first."); return; }
+
+				let obj;
+				try { obj = JSON.parse(raw); }
+				catch { alert("Invalid JSON in textarea."); return; }
+
+				if (!obj || typeof obj !== "object" || !Array.isArray(obj.Units)) {
+					alert("This JSON doesn't look like an army export (missing Units array).");
+					return;
+				}
+
+				currentArmy = normalizeLoadedArmy(obj);
+				selectedUnitId = null;
+
+				$("#armyName").val(currentArmy.Name || "");
+				$("#unitCreateCard :input").prop("disabled", false);
+				$("#modelCard :input").prop("disabled", false);
+
+				saveToStorage();
+				renderAll();
+				alert("Army imported.");
+			}
+
+			function loadArmyOnPage() {
+				const loaded = loadFromStorage();
+				if (!loaded) {
+					currentArmy = null;
+					$("#unitCreateCard :input").prop("disabled", true);
+					$("#modelCard :input").prop("disabled", true);
+					$("#armyName").val("");
+					$("#lastSaved").text("—");
+					renderAll();
+					return;
+				}
+				currentArmy = normalizeLoadedArmy(loaded);
+				$("#armyName").val(currentArmy.Name || "");
+				$("#unitCreateCard :input").prop("disabled", false);
+				$("#modelCard :input").prop("disabled", false);
+				$("#lastSaved").text("Loaded from local storage");
+				saveToStorage();
+				renderAll();
+			}
+
+			function renderAll() {
+				renderUnits();
+				renderRoster();
+			}
+
+			function resetModelFormDefaults() {
+				$("#modelName").val("");
+				$("#modelNick").val("");
+				$("#modelQty").val(1);
+			}
+
+			// ===========================
+			// jQuery events
+			// ===========================
+			$(document).ready(function(){
+				loadArmyOnPage();
+
+				$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+					if ($(e.target).attr("href") === "#tab-roster") renderRoster();
+				});
+
+				// chevrons sync
+				$(document).on("shown.bs.collapse hidden.bs.collapse", ".collapse", function(e){
+					const $collapse = $(e.target);
+					const id = $collapse.attr("id");
+					const $header = $(`[data-target="#${id}"]`);
+					const $chev = $header.find(".chev");
+					if (!$chev.length) return;
+					$chev.text($collapse.hasClass("show") ? "▾" : "▸");
+				});
+
+				// stop collapse when clicking controls in header
+				$(document).on("click", ".card-header.collapsible button, .card-header.collapsible input, .card-header.collapsible select, .card-header.collapsible a", function(e){
+					e.stopPropagation();
+				});
+
+				$("#btnNewArmy").on("click", function(){
+					currentArmy = null;
+					selectedUnitId = null;
+					$("#armyName").val("");
+					$("#lastSaved").text("—");
+					$("#unitCreateCard :input").prop("disabled", true);
+					$("#modelCard :input").prop("disabled", true);
+					renderAll();
+				});
+
+				$("#btnClearStorage").on("click", function(){
+					if (!confirm("Purge saved data?")) return;
+					clearStorage();
+					alert("Local storage purged.");
+					loadArmyOnPage();
+				});
+
+				$("#btnLoadFromTextarea").on("click", importArmyFromTextarea);
+
+				$("#btnCopyJson").on("click", async function(){
+					const text = $("#armyJson").val();
+					if (!text) return;
+					try { await navigator.clipboard.writeText(text); alert("Copied."); }
+					catch { $("#armyJson").focus().select(); document.execCommand("copy"); alert("Copied (fallback)."); }
+				});
+
+				$("#armyForm").on("submit", function(e){
+					e.preventDefault();
+					const name = $("#armyName").val().trim();
+					if (!name.length) return;
+
+					if (!currentArmy) currentArmy = new Army(name);
+					else currentArmy.Name = name;
+
+					currentArmy = normalizeLoadedArmy(currentArmy);
+
+					$("#unitCreateCard :input").prop("disabled", false);
+					$("#modelCard :input").prop("disabled", false);
+
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#armyKeywordInput").on("keydown", function(e){
+					if (e.key !== "Enter") return;
+					e.preventDefault();
+					if (!ensureArmyOrWarn()) return;
+					addChipTo(currentArmy.Keywords, $(this).val());
+					$(this).val("");
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#armyAbilityInput").on("keydown", function(e){
+					if (e.key !== "Enter") return;
+					e.preventDefault();
+					if (!ensureArmyOrWarn()) return;
+					addChipTo(currentArmy.Abilities, $(this).val());
+					$(this).val("");
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#unitForm").on("submit", function(e){
+					e.preventDefault();
+					if (!ensureArmyOrWarn()) return;
+
+					const name = $("#unitName").val().trim();
+					if (!name.length) return;
+
+					const u = new Unit(name, $("#unitNick").val().trim());
+					u.Points = Number($("#unitPoints").val()) || 0;
+					currentArmy.Units.push(u);
+					selectedUnitId = u.ID;
+
+					$("#unitName").val("");
+					$("#unitNick").val("");
+					$("#unitPoints").val(0);
+
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#unitsList").on("keydown", "input[data-action='unit-keyword-input']", function(e){
+					if (e.key !== "Enter") return;
+					e.preventDefault();
+					const unitId = $(this).data("unit-id");
+					const u = currentArmy?.Units?.find(x => x.ID === unitId);
+					if (!u) return;
+					addChipTo(u.Keywords, $(this).val());
+					$(this).val("");
+					saveToStorage();
+					renderAll();
+				});
+				$("#unitsList").on("keydown", "input[data-action='unit-ability-input']", function(e){
+					if (e.key !== "Enter") return;
+					e.preventDefault();
+					const unitId = $(this).data("unit-id");
+					const u = currentArmy?.Units?.find(x => x.ID === unitId);
+					if (!u) return;
+					addChipTo(u.Abilities, $(this).val());
+					$(this).val("");
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#unitsList").on("change", "input[data-action='edit-unit']", function(){
+					if (!ensureArmyOrWarn()) return;
+					const u = currentArmy.Units.find(x => x.ID === $(this).data("unit-id"));
+					if (!u) return;
+					u[$(this).data("field")] = parseMaybeNumber($(this).data("field"), $(this).val());
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#unitsList").on("click", "button[data-action]", function(e){
+					e.stopPropagation();
+					if (!ensureArmyOrWarn()) return;
+
+					const action = $(this).data("action");
+					const unitId = $(this).data("unit-id");
+
+					if (action === "select-unit") { selectedUnitId = unitId; renderAll(); return; }
+
+					if (action === "remove-unit") {
+						const u = currentArmy.Units.find(x => x.ID === unitId);
+						if (!u) return;
+						if (!confirm(`Remove unit "${formatUnitLabel(u)}"?`)) return;
+
+						for (const parent of currentArmy.Units) {
+							parent.BodyGuardUnitIds = (parent.BodyGuardUnitIds || []).filter(id => id !== unitId);
+						}
+						currentArmy.Units = currentArmy.Units.filter(x => x.ID !== unitId);
+						if (selectedUnitId === unitId) selectedUnitId = null;
+
+						saveToStorage();
+						renderAll();
+						return;
+					}
+
+					if (action === "assign-bodyguard") { openBodyguardModal(unitId); return; }
+
+					const modelId = $(this).data("model-id");
+					if (action === "remove-model") {
+						const u = currentArmy.Units.find(x => x.ID === unitId);
+						const m = (u?.Models || []).find(x => x.ID === modelId);
+						if (!m) return;
+						if (!confirm(`Remove model "${m.Name}" from "${formatUnitLabel(u)}"?`)) return;
+						u.Models = u.Models.filter(x => x.ID !== modelId);
+						saveToStorage();
+						renderAll();
+						return;
+					}
+
+					if (action === "edit-weapons") { openWeaponsModal(unitId, modelId); return; }
+					if (action === "model-keywords") { openModelKeywordsModal(unitId, modelId); return; }
+					if (action === "model-wargear") { openModelWargearModal(unitId, modelId); return; }
+				});
+
+				$("#modelForm").on("submit", function(e){
+					e.preventDefault();
+					if (!ensureArmyOrWarn()) return;
+
+					const u = getSelectedUnit();
+					if (!u) {
+						$("#selectUnitWarning").show();
+						setTimeout(() => $("#selectUnitWarning").fadeOut(200), 2000);
+						return;
+					}
+
+					const name = $("#modelName").val().trim();
+					const qty = Number($("#modelQty").val());
+					if (!name.length || !Number.isFinite(qty) || qty < 1) return;
+
+					for (let i = 0; i < qty; i++) {
+						u.Models.push(new Model(
+							name,
+							$("#modelNick").val().trim(),
+							Number($("#m").val()),
+							Number($("#t").val()),
+							$("#sv").val().trim(),
+							$("#inv").val().trim(),
+							$("#fnp").val().trim(),
+							Number($("#w").val()),
+							Number($("#ld").val()),
+							Number($("#oc").val())
+						));
+					}
+
+					resetModelFormDefaults();
+					saveToStorage();
+					renderAll();
+				});
+
+				$("#btnClearSelection").on("click", function(e){
+					e.stopPropagation();
+					selectedUnitId = null;
+					renderAll();
+				});
+
+				$("#bodyguardSelect").on("change", updateBodyguardModalTotals);
+				$("#btnSaveBodyguards").on("click", saveBodyguardsFromModal);
+
+				$("#btnAddRanged").on("click", function(){ weaponsDraft.Ranged.push(newRangedWeapon()); renderWeaponsModalTables(); });
+				$("#btnAddMelee").on("click", function(){ weaponsDraft.Melee.push(newMeleeWeapon()); renderWeaponsModalTables(); });
+
+				$("#weaponsModal").on("click", "button[data-action='remove-weapon']", function(){
+					const kind = $(this).data("kind");
+					const idx = Number($(this).data("idx"));
+					if (kind === "ranged") weaponsDraft.Ranged.splice(idx, 1);
+					if (kind === "melee") weaponsDraft.Melee.splice(idx, 1);
+					renderWeaponsModalTables();
+				});
+				$("#weaponsModal").on("input", "input[data-kind]", function(){
+					const kind = $(this).data("kind");
+					const idx = Number($(this).data("idx"));
+					const field = $(this).data("field");
+					const list = (kind === "ranged") ? weaponsDraft.Ranged : weaponsDraft.Melee;
+					if (!list || idx < 0 || idx >= list.length) return;
+					list[idx][field] = $(this).val();
+				});
+				$("#btnAddLibraryWeapon").on("click", addSelectedLibraryWeaponAuto);
+				$("#btnSaveWeapons").on("click", saveWeaponsFromModal);
+
+				$("#modelKeywordInput").on("keydown", function(e){
+					if (e.key !== "Enter") return;
+					e.preventDefault();
+					addKeywordToCurrentModel();
+				});
+				$("#btnAddModelKeyword").on("click", addKeywordToCurrentModel);
+
+				$("#modelWargearInput").on("keydown", function(e){
+					if (e.key !== "Enter") return;
+					e.preventDefault();
+					addWargearToCurrentModel();
+				});
+				$("#btnAddModelWargear").on("click", addWargearToCurrentModel);
+
+				$("#btnSaveDeathLog").on("click", saveDeathLogFromModal);
+
+				$("#rosterList").on("change", "input[data-action='toggle-dead']", function(){
+					if (!ensureArmyOrWarn()) return;
+					const unitId = $(this).data("unit-id");
+					const modelId = $(this).data("model-id");
+
+					const u = currentArmy.Units.find(x => x.ID === unitId);
+					const m = (u?.Models || []).find(x => x.ID === modelId);
+					if (!m) return;
+
+					const wasDead = !!m.IsDead;
+					m.IsDead = !!$(this).prop("checked");
+
+					// if revived, clear death log
+					if (wasDead && !m.IsDead) m.DeathLog = [];
+
+					saveToStorage();
+					renderAll();
+
+					// if just died, open log modal
+					if (!wasDead && m.IsDead) openDeathLogModal(unitId, modelId);
+				});
+			});
+		</script>
+	</body>
+</html>

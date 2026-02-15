@@ -687,7 +687,7 @@
 					<!-- ===================== ROSTER TAB ===================== -->
 					<div class="tab-pane fade" id="tab-roster" role="tabpanel" aria-labelledby="tab-roster-link">
 						<div class="card">
-							<div class="card-body">
+							 <div class="card-body">
 								<div id="rosterEmpty" class="muted">No army loaded.</div>
 								<div id="rosterList"></div>
 							</div>
@@ -1673,6 +1673,21 @@
 
 							<div id="${collapseId}" class="${collapseClass}">
 								<div class="card-body">
+									<div class="section-title mt-3">Unit Kill Log</div>
+									<div>
+										${(unit.KillLog && unit.KillLog.length)
+											? unit.KillLog.slice().reverse().map(k => `
+												<div class="weapon-pill">
+													<b>${escapeHtml(k.KilledUnitName || "Unknown")}</b>
+													<span class="muted"> • by </span>
+													${escapeHtml(k.WeaponLabel || "Unknown weapon")}
+													<span class="muted"> • ${escapeHtml(new Date(k.AtIso).toLocaleString())}</span>
+													${k.Notes ? `<div class="muted"><small>${escapeHtml(k.Notes)}</small></div>` : ``}
+												</div>
+											`).join("")
+											: `<span class="muted">No kills logged.</span>`
+										}
+									</div>
 									<div class="section-title">Abilities (Army + Unit + Wargear, alive models only)</div>
 									<div class="mb-3">${abilityHtml}</div>
 
@@ -1707,22 +1722,6 @@
 											</thead>
 											<tbody>${modelsHtml}</tbody>
 										</table>
-									</div>
-
-									<div class="section-title mt-3">Unit Kill Log</div>
-									<div>
-										${(unit.KillLog && unit.KillLog.length)
-											? unit.KillLog.slice().reverse().map(k => `
-												<div class="weapon-pill">
-													<b>${escapeHtml(k.KilledUnitName || "Unknown")}</b>
-													<span class="muted"> • by </span>
-													${escapeHtml(k.WeaponLabel || "Unknown weapon")}
-													<span class="muted"> • ${escapeHtml(new Date(k.AtIso).toLocaleString())}</span>
-													${k.Notes ? `<div class="muted"><small>${escapeHtml(k.Notes)}</small></div>` : ``}
-												</div>
-											`).join("")
-											: `<span class="muted">No kills logged.</span>`
-										}
 									</div>
 								</div>
 							</div>

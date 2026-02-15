@@ -1,0 +1,2284 @@
+{
+  "ID": "3fa5d955-5e7b-4b7b-8381-1c34a4d461d7",
+  "Name": "Grizzled Crusaders",
+  "Units": [
+    {
+      "ID": "221d16ce-1ae6-4d18-b18c-802045e91587",
+      "Name": "Krieg Command Squad",
+      "NickName": "19th",
+      "Models": [
+        {
+          "ID": "e9140e83-d679-4fbf-9237-d359093312ce",
+          "Name": "Lord Commissar",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 3,
+          "Leadership": 6,
+          "OC": 1,
+          "Keywords": [
+            "Officer",
+            "Character"
+          ],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Fist",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "6",
+              "AP": "2",
+              "Damage": "2",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "91b210c1-f019-4beb-aaf2-cc726cf13e33",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Laspistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Unit FNP6+ against mortals (Alchemyk Counteragents)",
+              "Ability": null
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "74145844-755f-47e6-80d2-3925ace710d6",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Weapon",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "96d76fa5-7a7d-44c3-a276-7d519ac56ab8",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Master Vox",
+              "Ability": null
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "dd473493-7d4b-4114-bdbc-597e384f4dc2",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Regimental Standard",
+              "Ability": null
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "e8d4ade3-d073-4ab3-b508-3f72a6f8e242",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Gun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Gun - supercharge",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [
+        "Infantry",
+        "Grenades",
+        "Imperium",
+        "Platoon",
+        "Krieg",
+        "Command Squad"
+      ],
+      "Abilities": [
+        "Battle-shock doesn't affect orders and strats for this unit."
+      ],
+      "Points": 65,
+      "BodyGuardUnitIds": [
+        "59e90d37-100b-4149-9562-dc3163d1f50f"
+      ],
+      "KillLog": []
+    },
+    {
+      "ID": "59e90d37-100b-4149-9562-dc3163d1f50f",
+      "Name": "Death Korps of Krieg",
+      "NickName": "19th",
+      "Models": [
+        {
+          "ID": "96742125-e0ef-4e3d-9ad5-29c29954ff43",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Medi-pack",
+              "Ability": {
+                "Name": "Command phase, return D3 models",
+                "Amount": null
+              }
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "b4bcd8b7-5f57-491f-b234-85f3e265810f",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Vox-caster",
+              "Ability": {
+                "Name": "Use strat, Officer w/in 6\", 5+ gain 1CP",
+                "Amount": null
+              }
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "5a029d60-d7ab-4411-92ed-79901663f7a7",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Gun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Gun - supercharge",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "17d46efc-a81b-4f44-b95a-64572972f33c",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Long-Las",
+              "Range": "36",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "2",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Heavy",
+                  "Amount": null
+                },
+                {
+                  "Name": "Precision",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "8f5f770f-50bd-4ba5-9af5-09afcb6278bf",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "d67fb27c-ff1b-4b5d-bae7-b52220f2f420",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "cb47896e-7a7a-43b2-bb50-814e31a9b0d4",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "ece78b6c-6309-40a0-9c2d-86b3f50e720f",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "ee992c65-a490-4174-b3c4-3d4db6eca449",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "d58f43ca-27f2-4ff7-aa4e-678eeb3ec868",
+          "Name": "Watchmaster",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [],
+      "Abilities": [],
+      "Points": 65,
+      "BodyGuardUnitIds": [],
+      "KillLog": []
+    },
+    {
+      "ID": "67de9c11-a887-4d18-8335-9e22917286cb",
+      "Name": "Krieg Command Squad",
+      "NickName": "15th",
+      "Models": [
+        {
+          "ID": "b59a309f-123f-415c-b77a-51c608286f9c",
+          "Name": "Lord Commissar",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 3,
+          "Leadership": 6,
+          "OC": 1,
+          "Keywords": [
+            "Officer",
+            "Character"
+          ],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Fist",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "6",
+              "AP": "2",
+              "Damage": "2",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "34982523-1584-4542-92a0-ca0441be5250",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Laspistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Unit FNP6+ against mortals (Alchemyk Counteragents)",
+              "Ability": null
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "1bbd1154-0b07-4052-8bf7-e8ce3d95fe66",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Weapon",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "dfadc608-4753-446e-bf8a-d0566b637c7b",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Master Vox",
+              "Ability": null
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "412c5bf7-1b37-48d2-b098-93b337ac1330",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Regimental Standard",
+              "Ability": null
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "922f2a4b-d809-4f5e-9475-e9a640ccbdb6",
+          "Name": "Veteran Guardsman",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Gun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Gun - supercharge",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [
+        "Infantry",
+        "Grenades",
+        "Imperium",
+        "Platoon",
+        "Krieg",
+        "Command Squad"
+      ],
+      "Abilities": [
+        "Battle-shock doesn't affect orders and strats for this unit."
+      ],
+      "Points": 65,
+      "BodyGuardUnitIds": [
+        "dbeac4f3-4e9f-443a-9c5b-addc9bf4f331"
+      ],
+      "KillLog": [
+        {
+          "AtIso": "2026-02-15T05:04:29.651Z",
+          "KilledUnitName": "TEST",
+          "WeaponKey": "{\"Kind\":\"ranged\",\"Name\":\"Lasgun\",\"Range\":\"24\",\"Attacks\":\"1\",\"Skill\":\"4\",\"Strength\":\"3\",\"AP\":\"0\",\"Damage\":\"1\",\"Abilities\":\"[{\\\"Name\\\":\\\"Rapid Fire\\\",\\\"Amount\\\":1}]\"}",
+          "WeaponLabel": "Lasgun • R 24 • A 1 • BS 4 • S 3 • AP 0 • D 1 • Rapid Fire (1)",
+          "Notes": null
+        }
+      ]
+    },
+    {
+      "ID": "dbeac4f3-4e9f-443a-9c5b-addc9bf4f331",
+      "Name": "Death Korps of Krieg",
+      "NickName": "15th",
+      "Models": [
+        {
+          "ID": "30dbdbda-bed3-4d01-bcfb-fa9fcbaa160c",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Medi-pack",
+              "Ability": {
+                "Name": "Command phase, return D3 models",
+                "Amount": null
+              }
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "a1f929fe-37ed-4932-8298-d0390f5cb301",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Vox-caster",
+              "Ability": {
+                "Name": "Use strat, Officer w/in 6\", 5+ gain 1CP",
+                "Amount": null
+              }
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "94fcee46-df8b-4eb7-b1fd-3ae1835deec8",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Gun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Gun - supercharge",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "564a7a6a-7eb6-4d0e-9e2a-2d0e9a85884a",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Meltagun",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "9",
+              "AP": "4",
+              "Damage": "D6",
+              "Abilities": [
+                {
+                  "Name": "Melta",
+                  "Amount": 2
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "af9af5ab-2807-4dc6-95ef-6d822c761ed1",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "4f9b7865-2283-41bd-96cb-4c5a0aea1a81",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "cc161003-9662-4b38-a8ee-c2c0973d8042",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "534f8142-078b-47d4-bf1e-5d168ba87b4d",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "895391bb-6d83-4bea-bf86-dca7e867c3aa",
+          "Name": "Trooper",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "fcb58277-cc05-4671-910d-cfcbc1dd8d1b",
+          "Name": "Watchmaster",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "5+",
+          "InvulnerableSave": "—",
+          "FeelNoPain": "—",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [],
+      "Abilities": [],
+      "Points": 65,
+      "BodyGuardUnitIds": [],
+      "KillLog": []
+    },
+    {
+      "ID": "8602d532-c3b7-4e8c-8645-c60024f6c339",
+      "Name": "Chimera",
+      "NickName": "Eisenfaust",
+      "Models": [
+        {
+          "ID": "c3d94f9d-62b2-48be-8219-82adaae60e85",
+          "Name": "Chimera",
+          "NickName": "Eisenfaust",
+          "Movement": 10,
+          "Toughness": 9,
+          "Save": "3",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 11,
+          "Leadership": 7,
+          "OC": 2,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Heavy Bolter",
+              "Range": "36",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "5",
+              "AP": "1",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Sustained Hits",
+                  "Amount": 1
+                }
+              ]
+            },
+            {
+              "Name": "Heavy Stubber",
+              "Range": "36",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 3
+                }
+              ]
+            },
+            {
+              "Name": "Hunter-Killed missile",
+              "Range": "48",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "14",
+              "AP": "3",
+              "Damage": "D6",
+              "Abilities": [
+                {
+                  "Name": "One-Shot",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Lasgun array",
+              "Range": "24",
+              "Attacks": "6",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 6
+                }
+              ]
+            },
+            {
+              "Name": "Heavy Bolter",
+              "Range": "36",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "5",
+              "AP": "1",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Sustained Hits",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Armoured Tracks",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "6",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [
+        "Vehicle",
+        "Smoke",
+        "Imperium",
+        "Squadron",
+        "Transport",
+        "Dedicated Transport"
+      ],
+      "Abilities": [
+        "Command phase - Embarked officer can issue order"
+      ],
+      "Points": 85,
+      "BodyGuardUnitIds": [],
+      "KillLog": []
+    },
+    {
+      "ID": "27b7e262-c719-43fb-a9a1-087f28aee82f",
+      "Name": "Artillery Team",
+      "NickName": "107th Team 2",
+      "Models": [
+        {
+          "ID": "0c381fba-eaf5-4ae1-878c-ecb32a787103",
+          "Name": "Artillery Team",
+          "NickName": "",
+          "Movement": 3,
+          "Toughness": 7,
+          "Save": "3",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 10,
+          "Leadership": 7,
+          "OC": 3,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Siege cannon",
+              "Range": "48",
+              "Attacks": "D6+1",
+              "Skill": "5",
+              "Strength": "12",
+              "AP": "3",
+              "Damage": "3",
+              "Abilities": [
+                {
+                  "Name": "Blast",
+                  "Amount": null
+                },
+                {
+                  "Name": "Heavy",
+                  "Amount": null
+                },
+                {
+                  "Name": "Indirect Fire",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Lasgun",
+              "Range": "24",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Rapid Fire",
+                  "Amount": 1
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Crew close combat weapons",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [
+        "Infantry",
+        "Artillery",
+        "Grenades",
+        "Imperium",
+        "Regiment",
+        "Artillery Team"
+      ],
+      "Abilities": [
+        "Indirect fire hits cause battle-shock test for target."
+      ],
+      "Points": 95,
+      "BodyGuardUnitIds": [],
+      "KillLog": []
+    },
+    {
+      "ID": "0d464631-81bb-4531-9dc3-6fdd70166878",
+      "Name": "Krieg Combat Engineers",
+      "NickName": "309th",
+      "Models": [
+        {
+          "ID": "673f50af-c3b5-45aa-87f1-a915f91d8f4f",
+          "Name": "Watchmaster",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "4",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Plasma Pistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "7",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            },
+            {
+              "Name": "Plasma Pistol - supercharge",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "8",
+              "AP": "3",
+              "Damage": "2",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                },
+                {
+                  "Name": "Hazardous",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Power Weapon",
+              "Attacks": "3",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "2",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "64ec30f8-5289-4603-94c1-88889f6ee9ad",
+          "Name": "Combat Engineer",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "4",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Autopistol",
+              "Range": "12",
+              "Attacks": "1",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Pistol",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [
+            {
+              "Name": "Remote Mine",
+              "Ability": {
+                "Name": "Unit visible within 9\", D6 on 3+, take D3 mortals or 2D3 mortals if vehicle",
+                "Amount": null
+              }
+            }
+          ],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "e5fcf2c7-c99f-4853-8234-53ffd4c838a3",
+          "Name": "Combat Engineer",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "4",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Flamer",
+              "Range": "12",
+              "Attacks": "D6",
+              "Skill": "0",
+              "Strength": "4",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Torrent",
+                  "Amount": null
+                },
+                {
+                  "Name": "Ignores Cover",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "84992a6d-ed27-49da-a508-dfb120baf183",
+          "Name": "Combat Engineer",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "4",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Combat Shotgun",
+              "Range": "12",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Assault",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        },
+        {
+          "ID": "b8110a24-fee1-44b6-ac38-9e4174194b9c",
+          "Name": "Combat Engineer",
+          "NickName": "",
+          "Movement": 6,
+          "Toughness": 3,
+          "Save": "4",
+          "InvulnerableSave": "",
+          "FeelNoPain": "",
+          "Wounds": 1,
+          "Leadership": 7,
+          "OC": 1,
+          "Keywords": [],
+          "Ranged": [
+            {
+              "Name": "Combat Shotgun",
+              "Range": "12",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "4",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": [
+                {
+                  "Name": "Assault",
+                  "Amount": null
+                }
+              ]
+            }
+          ],
+          "Melee": [
+            {
+              "Name": "Close combat weapon",
+              "Attacks": "2",
+              "Skill": "4",
+              "Strength": "3",
+              "AP": "0",
+              "Damage": "1",
+              "Abilities": []
+            }
+          ],
+          "Wargear": [],
+          "IsDead": false,
+          "DeathLog": []
+        }
+      ],
+      "Keywords": [
+        "Infantry",
+        "Smoke",
+        "Grenades",
+        "Imperium",
+        "Regiment"
+      ],
+      "Abilities": [
+        "Free grenades once per turn"
+      ],
+      "Points": 60,
+      "BodyGuardUnitIds": [],
+      "KillLog": []
+    }
+  ],
+  "Abilities": [
+    "Re-roll hits for all ASTRA MILITARUM units.",
+    "Return 1 non-character model to each REGIMENT INFANTRY unit that is not at full strength in the Command Phase."
+  ],
+  "Keywords": [
+    "Astra Militarum"
+  ]
+}

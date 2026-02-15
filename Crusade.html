@@ -96,25 +96,19 @@
 
 			/* ===========================
 			   HEAVY CRT EFFECT (toggle via body class "crt-heavy")
-			   CHANGE REQUEST: remove distortion to the whole view
-			   - Removed filter:url(#crtFilter)
-			   - Removed perspective/rotate transforms
-			   - Kept overlays + flicker only
+			   - No whole-view distortion
+			   - Flicker + overlays only
 			   =========================== */
 			.crt-stage{
 				position: relative;
 				min-height: 100%;
 				padding: 14px 10px 18px;
 			}
-
-			/* No whole-view distortion anymore */
 			body.crt-heavy .crt-stage{
 				filter: none;
 				transform: none;
 				transform-origin: center;
 			}
-
-			/* stronger scanlines + phosphor mask overlay */
 			body.crt-heavy::before{
 				content:"";
 				position: fixed;
@@ -140,7 +134,6 @@
 				mix-blend-mode: multiply;
 				opacity: .95;
 			}
-
 			body.crt-heavy::after{
 				content:"";
 				position: fixed;
@@ -164,14 +157,12 @@
 				57% { opacity: 1; }
 				100% { opacity: 1; }
 			}
-
 			body.crt-heavy .crt-stage{
 				animation-name: crt-flicker-heavy;
 				animation-duration: 7s;
 				animation-iteration-count: infinite;
 				animation-timing-function: ease-in-out;
 			}
-
 			@media (prefers-reduced-motion: reduce){
 				body.crt-heavy .crt-stage{ animation: none; }
 			}
@@ -510,6 +501,7 @@
 				<div class="tab-content">
 					<!-- ===================== SETUP TAB ===================== -->
 					<div class="tab-pane fade show active" id="tab-setup" role="tabpanel" aria-labelledby="tab-setup-link">
+						<!-- (setup unchanged; omitted for brevity in comments only — full HTML kept) -->
 
 						<div class="card">
 							<div class="card-header collapsible" data-toggle="collapse" data-target="#collapse_import" aria-expanded="true">
@@ -747,7 +739,6 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					</div>
 
-					<!-- RESTORED: previously entered weapons list / library -->
 					<div class="sticky-bar">
 						<div class="row">
 							<div class="col-lg-9">
@@ -921,6 +912,41 @@
 			</div>
 		</div>
 
+		<!-- NEW: Unit Kill Log Modal -->
+		<div class="modal fade" id="unitKillLogModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Log Unit Kill</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<div class="muted mb-2" id="unitKillLogLabel"></div>
+
+						<div class="form-group">
+							<label class="small-label" for="killedUnitName">Killed unit name</label>
+							<input id="killedUnitName" class="form-control" placeholder='e.g. "Hormagaunts", "Intercessors", etc.'>
+						</div>
+
+						<div class="form-group">
+							<label class="small-label" for="killWeaponSelect">Weapon used (distinct profile)</label>
+							<select id="killWeaponSelect" class="form-control"></select>
+							<small class="form-text muted">Pulled from this unit + its bodyguards (alive models only).</small>
+						</div>
+
+						<div class="form-group mb-0">
+							<label class="small-label" for="killNotes">Notes (optional)</label>
+							<input id="killNotes" class="form-control" placeholder="Any extra detail (mission, turn, target model, etc.)">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="btnSaveUnitKillLog">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 		<script>
@@ -946,6 +972,8 @@
 					this.Abilities = [];
 					this.Points = 0;
 					this.BodyGuardUnitIds = [];
+					// NEW: unit-level kill log
+					this.KillLog = [];
 				}
 			}
 			class Model {
@@ -999,6 +1027,10 @@
 
 			let deathLogUnitId = null;
 			let deathLogModelId = null;
+
+			// NEW: unit kill log modal state
+			let unitKillLogUnitId = null;
+			let unitKillLogAggregateUnitIds = null; // includes bodyguards
 
 			function saveToStorage() {
 				if (!currentArmy) return;
@@ -1154,7 +1186,6 @@
 				return `${n(w.Name) || "Melee"} • A ${n(w.Attacks)||"—"} • WS ${n(w.Skill)||"—"} • S ${n(w.Strength)||"—"} • AP ${n(w.AP)||"—"} • D ${n(w.Damage)||"—"}${abText ? " • " + abText : ""}`;
 			}
 
-			/* RESTORED REQUEST: weapon library built from all weapons already entered anywhere */
 			function buildWeaponLibraryFromArmy() {
 				const map = new Map();
 				if (!currentArmy) return [];
@@ -1325,6 +1356,46 @@
 			function getBodyguardTreeChildren(parentUnit) {
 				const ids = parentUnit.BodyGuardUnitIds || [];
 				return ids.map(id => currentArmy.Units.find(u => u.ID === id)).filter(Boolean);
+			}
+
+			function collectAggregateUnitIds(rootUnit){
+				const ids = [];
+				(function collect(u){
+					ids.push(u.ID);
+					for (const bg of getBodyguardTreeChildren(u)) collect(bg);
+				})(rootUnit);
+				return ids;
+			}
+
+			function aliveModelCountFromUnitIds(unitIds){
+				let alive = 0;
+				for (const id of unitIds){
+					const u = currentArmy.Units.find(x => x.ID === id);
+					if (!u) continue;
+					alive += (u.Models || []).filter(m => !m.IsDead).length;
+				}
+				return alive;
+			}
+			function deadModelCountFromUnitIds(unitIds){
+				let dead = 0;
+				for (const id of unitIds){
+					const u = currentArmy.Units.find(x => x.ID === id);
+					if (!u) continue;
+					dead += (u.Models || []).filter(m => m.IsDead).length;
+				}
+				return dead;
+			}
+			function totalAliveWoundsFromUnitIds(unitIds){
+				let sum = 0;
+				for (const id of unitIds){
+					const u = currentArmy.Units.find(x => x.ID === id);
+					if (!u) continue;
+					for (const m of (u.Models || [])){
+						if (m.IsDead) continue;
+						sum += Number(m.Wounds) || 0;
+					}
+				}
+				return sum;
 			}
 
 			// ===========================
@@ -1506,9 +1577,18 @@
 			// ===========================
 			// Roster rendering with nesting + parent aggregation
 			// ===========================
-			function renderRosterUnitCard(unit, depth, unitIdsAggregate, startCollapsed) {
-				const living = unit.Models.filter(m => !m.IsDead).length;
-				const dead = unit.Models.filter(m => m.IsDead).length;
+			function renderRosterUnitCard(unit, depth, unitIdsAggregate, startCollapsed, countsMode) {
+				// countsMode:
+				// - "aggregate": show alive/dead/wounds across unitIdsAggregate
+				// - "self": show only this unit's own models
+				const countIds = (countsMode === "aggregate") ? unitIdsAggregate : [unit.ID];
+
+				// REQUEST:
+				// - Parent/root unit card alive model count includes bodyguard models alive
+				// - Header includes total wounds for all alive models in this unit and its bodyguards
+				const living = aliveModelCountFromUnitIds(countIds);
+				const dead = deadModelCountFromUnitIds(countIds);
+				const aliveWounds = totalAliveWoundsFromUnitIds(countIds);
 
 				const weaponSections = consolidateWeaponsForSectionsFromUnitIds(unitIdsAggregate);
 
@@ -1581,9 +1661,14 @@
 								<div class="d-flex align-items-center justify-content-between">
 									<div>
 										<strong>${titlePrefix}${escapeHtml(formatUnitLabel(unit))}</strong>
-										<div class="muted">Models: ${living} alive, ${dead} dead • Base:${unitBasePoints(unit)} • Total:${unitTotalPoints(unit)}</div>
+										<div class="muted">Models: ${living} alive, ${dead} dead • Alive Wounds: ${aliveWounds} • Base:${unitBasePoints(unit)} • Total:${unitTotalPoints(unit)}</div>
 										<div class="mt-2">
 											<button class="btn btn-sm btn-outline-primary" data-action="duplicate-unit-roster" data-unit-id="${unit.ID}" type="button">Duplicate Unit</button>
+											<button class="btn btn-sm btn-outline-secondary ml-2"
+												data-action="log-unit-kill"
+												data-unit-id="${unit.ID}"
+												data-aggregate-ids="${escapeAttr(JSON.stringify(unitIdsAggregate))}"
+												type="button">Log Kill…</button>
 										</div>
 									</div>
 									<div class="chev">${chevron}</div>
@@ -1627,6 +1712,22 @@
 											<tbody>${modelsHtml}</tbody>
 										</table>
 									</div>
+
+									<div class="section-title mt-3">Unit Kill Log</div>
+									<div>
+										${(unit.KillLog && unit.KillLog.length)
+											? unit.KillLog.slice().reverse().map(k => `
+												<div class="weapon-pill">
+													<b>${escapeHtml(k.KilledUnitName || "Unknown")}</b>
+													<span class="muted"> • by </span>
+													${escapeHtml(k.WeaponLabel || "Unknown weapon")}
+													<span class="muted"> • ${escapeHtml(new Date(k.AtIso).toLocaleString())}</span>
+													${k.Notes ? `<div class="muted"><small>${escapeHtml(k.Notes)}</small></div>` : ``}
+												</div>
+											`).join("")
+											: `<span class="muted">No kills logged.</span>`
+										}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1644,24 +1745,17 @@
 				const roots = getRootUnitsForRoster(currentArmy).sort((a,b)=>formatUnitLabel(a).localeCompare(formatUnitLabel(b)));
 
 				for (const root of roots) {
-					const aggregateIds = [];
-					(function collect(u){
-						aggregateIds.push(u.ID);
-						for (const bg of getBodyguardTreeChildren(u)) collect(bg);
-					})(root);
+					const aggregateIds = collectAggregateUnitIds(root);
 
-					$roster.append(renderRosterUnitCard(root, 0, aggregateIds, false));
+					// Root card: counts aggregated across itself + bodyguards
+					$roster.append(renderRosterUnitCard(root, 0, aggregateIds, false, "aggregate"));
 
 					(function renderChildren(u, depth){
 						for (const bg of getBodyguardTreeChildren(u)) {
-							const ids = [];
-							(function collect2(x){
-								ids.push(x.ID);
-								for (const c of getBodyguardTreeChildren(x)) collect2(c);
-							})(bg);
+							const ids = collectAggregateUnitIds(bg);
 
-							/* REQUEST: bodyguard unit cards collapsed by default */
-							$roster.append(renderRosterUnitCard(bg, depth, ids, true));
+							// Bodyguard cards: show only self counts (not parent's) and start collapsed
+							$roster.append(renderRosterUnitCard(bg, depth, ids, true, "self"));
 							renderChildren(bg, depth + 1);
 						}
 					})(root, 1);
@@ -1679,6 +1773,7 @@
 				clone.ID = crypto.randomUUID();
 				clone.Name = `${clone.Name} (Copy)`;
 				clone.BodyGuardUnitIds = [];
+				clone.KillLog = []; // don't copy kill log into duplicates by default
 
 				for (const m of (clone.Models || [])) {
 					m.ID = crypto.randomUUID();
@@ -1692,7 +1787,7 @@
 			}
 
 			// ===========================
-			// Weapons modal
+			// Modal actions: weapons / keywords / wargear / bodyguards / death log / unit kill log
 			// ===========================
 			function renderAbilityChips(kind, idx, abilities) {
 				const list = (abilities || []).map((a, aIdx) => {
@@ -1749,7 +1844,6 @@
 				}
 
 				$("#weaponsModalModelLabel").html(`Model: <strong>${escapeHtml(m.Name)}</strong> <span class="muted">in</span> <strong>${escapeHtml(formatUnitLabel(u))}</strong>`);
-				/* REQUEST: repopulate the weapon library every time modal opens */
 				renderWeaponLibrarySelect();
 				renderWeaponsModalTables();
 				$("#weaponsModal").modal("show");
@@ -1809,9 +1903,6 @@
 				$("#weaponsModal").modal("hide");
 			}
 
-			// ===========================
-			// Model keywords modal
-			// ===========================
 			function openModelKeywordsModal(unitId, modelId) {
 				const u = currentArmy.Units.find(x => x.ID === unitId);
 				const m = (u?.Models || []).find(x => x.ID === modelId);
@@ -1854,9 +1945,6 @@
 				renderAll();
 			}
 
-			// ===========================
-			// Model wargear modal
-			// ===========================
 			function openModelWargearModal(unitId, modelId) {
 				const u = currentArmy.Units.find(x => x.ID === unitId);
 				const m = (u?.Models || []).find(x => x.ID === modelId);
@@ -1932,9 +2020,6 @@
 				renderAll();
 			}
 
-			// ===========================
-			// Death log modal
-			// ===========================
 			function openDeathLogModal(unitId, modelId) {
 				const u = currentArmy.Units.find(x => x.ID === unitId);
 				const m = (u?.Models || []).find(x => x.ID === modelId);
@@ -1963,9 +2048,6 @@
 				$("#deathLogModal").modal("hide");
 			}
 
-			// ===========================
-			// Bodyguards modal
-			// ===========================
 			function createsBodyguardCycle(parentId, candidateId) {
 				const visited = new Set();
 				function dfs(uId) {
@@ -2043,26 +2125,94 @@
 			}
 
 			// ===========================
-			// Duplicate unit
+			// NEW: Unit Kill Logging
 			// ===========================
-			function duplicateUnit(unitId) {
+			function distinctWeaponsFromUnitIdsAlive(unitIds){
+				const map = new Map(); // weaponKey -> { kind, weapon, label }
+				for (const unitId of unitIds){
+					const u = currentArmy?.Units?.find(x => x.ID === unitId);
+					if (!u) continue;
+
+					for (const m of (u.Models || [])){
+						if (m.IsDead) continue;
+
+						for (const w of (m.Ranged || [])){
+							if (!w || !String(w.Name||"").trim()) continue;
+							const k = weaponKey("ranged", w);
+							if (!map.has(k)) map.set(k, { key: k, kind: "ranged", weapon: w, label: weaponLabel("ranged", w) });
+						}
+						for (const w of (m.Melee || [])){
+							if (!w || !String(w.Name||"").trim()) continue;
+							const k = weaponKey("melee", w);
+							if (!map.has(k)) map.set(k, { key: k, kind: "melee", weapon: w, label: weaponLabel("melee", w) });
+						}
+					}
+				}
+				return Array.from(map.values()).sort((a,b)=>a.label.localeCompare(b.label));
+			}
+
+			function openUnitKillLogModal(unitId, aggregateUnitIds){
 				const u = currentArmy?.Units?.find(x => x.ID === unitId);
 				if (!u) return;
 
-				const clone = JSON.parse(JSON.stringify(u));
-				clone.ID = crypto.randomUUID();
-				clone.Name = `${clone.Name} (Copy)`;
-				clone.BodyGuardUnitIds = [];
+				unitKillLogUnitId = unitId;
+				unitKillLogAggregateUnitIds = aggregateUnitIds;
 
-				for (const m of (clone.Models || [])) {
-					m.ID = crypto.randomUUID();
-					m.IsDead = false;
-					m.DeathLog = [];
+				$("#unitKillLogLabel").html(`Killer Unit: <strong>${escapeHtml(formatUnitLabel(u))}</strong>`);
+
+				$("#killedUnitName").val("");
+				$("#killNotes").val("");
+
+				const weapons = distinctWeaponsFromUnitIdsAlive(aggregateUnitIds);
+				const $sel = $("#killWeaponSelect");
+				$sel.empty();
+				if (!weapons.length){
+					$sel.append(`<option value="">(No weapons found on alive models)</option>`);
+				} else {
+					$sel.append(`<option value="">(Select weapon…)</option>`);
+					for (let i = 0; i < weapons.length; i++){
+						$sel.append(`<option value="${escapeAttr(String(i))}">${escapeHtml(weapons[i].label)}</option>`);
+					}
+				}
+				$sel.data("weapons", weapons);
+
+				$("#unitKillLogModal").modal("show");
+			}
+
+			function saveUnitKillLogFromModal(){
+				const u = currentArmy?.Units?.find(x => x.ID === unitKillLogUnitId);
+				if (!u) return;
+
+				u.KillLog = u.KillLog || [];
+
+				const killedName = normalizeTextItem($("#killedUnitName").val());
+				const notes = normalizeTextItem($("#killNotes").val());
+
+				const weapons = $("#killWeaponSelect").data("weapons") || [];
+				const wIdxRaw = $("#killWeaponSelect").val();
+				const wIdx = (wIdxRaw === "" ? null : Number(wIdxRaw));
+				const weapon = (wIdx === null || !Number.isFinite(wIdx)) ? null : weapons[wIdx];
+
+				if (!killedName.length){
+					alert("Enter the killed unit name.");
+					return;
+				}
+				if (!weapon){
+					alert("Select the weapon profile used.");
+					return;
 				}
 
-				currentArmy.Units.push(clone);
+				u.KillLog.push({
+					AtIso: new Date().toISOString(),
+					KilledUnitName: killedName,
+					WeaponKey: weapon.key,
+					WeaponLabel: weapon.label,
+					Notes: notes || null
+				});
+
 				saveToStorage();
-				renderAll();
+				renderRoster();
+				$("#unitKillLogModal").modal("hide");
 			}
 
 			// ===========================
@@ -2080,6 +2230,9 @@
 					u.Keywords = u.Keywords || [];
 					u.Abilities = u.Abilities || [];
 					u.Points = Number(u.Points) || 0;
+
+					// NEW: ensure kill log exists
+					u.KillLog = Array.isArray(u.KillLog) ? u.KillLog : [];
 
 					if (!Array.isArray(u.BodyGuardUnitIds)) {
 						if (Array.isArray(u.BodyGuard) && u.BodyGuard.length) {
@@ -2500,6 +2653,9 @@
 
 				$("#btnSaveDeathLog").on("click", saveDeathLogFromModal);
 
+				// NEW: save unit kill log
+				$("#btnSaveUnitKillLog").on("click", saveUnitKillLogFromModal);
+
 				$("#rosterList").on("change", "input[data-action='toggle-dead']", function(){
 					if (!ensureArmyOrWarn()) return;
 					const unitId = $(this).data("unit-id");
@@ -2512,7 +2668,6 @@
 					const wasDead = !!m.IsDead;
 					m.IsDead = !!$(this).prop("checked");
 
-					/* opens death log modal when newly marked dead */
 					if (!wasDead && m.IsDead) {
 						saveToStorage();
 						renderRoster();
@@ -2531,6 +2686,20 @@
 					if (!ensureArmyOrWarn()) return;
 					const unitId = $(this).data("unit-id");
 					duplicateUnit(unitId);
+				});
+
+				// NEW: open unit kill log modal from roster cards
+				$("#rosterList").on("click", "button[data-action='log-unit-kill']", function(e){
+					e.stopPropagation();
+					if (!ensureArmyOrWarn()) return;
+					const unitId = $(this).data("unit-id");
+					let aggregateIds = [];
+					try { aggregateIds = JSON.parse($(this).attr("data-aggregate-ids") || "[]"); } catch {}
+					if (!Array.isArray(aggregateIds) || !aggregateIds.length) {
+						const unit = currentArmy.Units.find(x => x.ID === unitId);
+						if (unit) aggregateIds = collectAggregateUnitIds(unit);
+					}
+					openUnitKillLogModal(unitId, aggregateIds);
 				});
 			});
 		</script>
